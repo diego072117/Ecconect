@@ -29,7 +29,25 @@ export const registerUserAsync = createAsyncThunk(
   }
 );
 
-
+export const loginUserAsync = createAsyncThunk(
+  "users/loginUser",
+  async (userData) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/Users/Login",
+        userData
+      );
+      const authData = {
+        access_token: response.data.access_token,
+        user: response.data.user,
+      };
+      localStorage.setItem("auth", JSON.stringify(authData));
+      return authData; // Devuelve el objeto con el token y el usuario
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
 
 export const usersSlice = createSlice({
   name: "users",
@@ -49,7 +67,7 @@ export const usersSlice = createSlice({
       })
       .addCase(registerUserAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        console.log('exito pa');
+        console.log("exito pa");
         // Swal.fire({
         //   icon: "success",
         //   title: "Registro exitoso",
@@ -61,14 +79,26 @@ export const usersSlice = createSlice({
       .addCase(registerUserAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log('error');
+        console.log("error");
         // Swal.fire({
         //   icon: "error",
         //   title: "Error",
         //   text: "Error al registrar el usuario.",
         // });
       })
-    
+      .addCase(loginUserAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(loginUserAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.auth = action.payload;
+        console.log("exito login");
+      })
+      .addCase(loginUserAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        console.log("error");
+      });
   },
 });
 
