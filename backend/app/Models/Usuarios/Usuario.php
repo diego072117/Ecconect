@@ -2,6 +2,7 @@
 
 namespace App\Models\Usuarios;
 
+use App\Models\Posts\Posts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -24,6 +25,10 @@ class Usuario extends Authenticatable implements JWTSubject
 
     // relaciones con otras tablas, puedes definirlas aquí
 
+    public function posts()
+    {
+        return $this->hasMany(Posts::class, 'id_usuarioCreador');
+    }
 
     public function getJWTIdentifier()
     {

@@ -5,6 +5,7 @@ import { Dashboard } from "../pages/Dashboard/Dashbord";
 import { Nav } from "../components/Nav/Nav";
 import { useValidators } from "../hooks/useValidators";
 import { Login } from "../pages/Login/Login";
+import { Post } from "../pages/CreatePost/Post";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -15,9 +16,11 @@ export const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/registro-usuario" element={<Register />} />
         <Route path="/login-usuario" element={<Login />} />
-        <Route path="/dashboard" element={
-          isUserAuthenticated() ? <Dashboard /> : <>error pa</> 
-        } />
+        <Route
+          path="/dashboard"
+          element={isUserAuthenticated() ? <Dashboard /> : <>error pa</>}
+        />
+        <Route path="/new-post" element={<Post />} />
       </Routes>
     </>
   );

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Usuarios\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'Users', 'controller' => UsuarioController::class], function () {
     Route::post('/CreateUser', 'createUser');
     Route::post('/Login', 'loginUser');
+});
+
+Route::group(['prefix' => 'Posts', 'controller' => PostController::class], function () {
+    Route::post('/CreatePost', 'createPost');
 });
