@@ -1,3 +1,9 @@
+import "./Module.scss"
+
 export const Dashboard = () => {
-  return <>soy el dashbord</>;
+  return(
+    <div className="dashboard">
+      soy el dashboard
+    </div>
+  );
 };
