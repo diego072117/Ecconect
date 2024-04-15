@@ -14,7 +14,7 @@ body,p{
   .layout-content {
     flex: 1; 
     overflow-y: auto;
-    background-color: #080404;
+    background-color: #000;
   }
 
 ::-webkit-scrollbar {
@@ -35,3 +35,4 @@ body,p{
 ::-webkit-scrollbar-thumb:hover {
     background: #7878a3;
   }
+

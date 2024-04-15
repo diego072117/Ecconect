@@ -1,0 +1,90 @@
+.create {
+  padding: 2em 8em;
+  .title-create {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-family: cursive;
+    font-weight: 600;
+    img {
+      margin: 0 1em 0 0;
+    }
+  }
+}
+
+.form-create {
+  .container-post {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: cursive;
+    margin-bottom: 2em;
+    .desc-post {
+      margin: 15px 0 7px 0;
+    }
+  }
+}
+
+.form-input {
+  color: #fff;
+  background-color: #09090a;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 12px;
+  margin: 4px 0 16px;
+  border: none;
+  height: 10em;
+  border-radius: 15px;
+  resize: none;
+}
+
+.form-input:focus {
+  border: 0.1em solid #877eff;
+}
+
+.img-post {
+  background-color: #09090a;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 8em;
+}
+
+.preview-post {
+  background-color: #09090a;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2em 0;
+  img {
+    border-radius: 30px;
+    width: 90%;
+  }
+}
+
+.file_uploader-label {
+  text-align: center;
+  border-top: 1px solid #5c5c7b;
+  color: #5c5c7b;
+  background-color: #09090a;
+  border-radius: 0 0 10px 10px;
+  padding: 1em;
+}
+
+.container-create-post {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-create-post {
+  background-color: #877eff;
+  padding: 1em;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}

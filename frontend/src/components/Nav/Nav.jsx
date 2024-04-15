@@ -17,6 +17,7 @@ export const Nav = () => {
             alt="logo"
             width={170}
             height={36}
+            className="logo"
           />
         </Link>
         <Link to={`/profile/${user.id}`} className="info-user">
@@ -26,27 +27,23 @@ export const Nav = () => {
             className="h-14 w-14 rounded-full"
           />
           <div className="flex flex-col">
-            <p className="user-name">Diego</p>
-            <p className="small-regular text-light-3">@Diego</p>
+            <p className="user-name">{user.name} {user.lastName}</p>
+            <p className="tag-name">@{user.name}</p>
           </div>
         </Link>
         <div className="flex flex-col gap-6 options-nav">
           {sidebarLinks.map((link) => {
             const isActive = pathname === link.route;
             return (
-              <div
-                key={link.label}
-                className={`leftsidebar-link group ${
-                  isActive && "bg-primary-500"
-                }`}
-              >
-                <NavLink to={link.route} className="nav-link">
+              <div key={link.label} className="leftsidebar-link">
+                <NavLink
+                  to={link.route}
+                  className={`nav-link ${isActive && "hover-items"}`}
+                >
                   <img
                     src={link.imgURL}
                     alt={link.label}
-                    className={`group-hover:invert-white ${
-                      isActive && "invert-white"
-                    }`}
+                    className={`${isActive && "icon-nav"}`}
                   />
                   {link.label}
                 </NavLink>
@@ -54,12 +51,11 @@ export const Nav = () => {
             );
           })}
         </div>
+        <button className="button-logout" onClick={LogoutUser}>
+          <img src="/assets/icons/logout.svg" alt="logout" />
+          <p className="small-medium lg:base-medium">Logout</p>
+        </button>
       </div>
     </nav>
   );
 };
-{
-  /* <button className="sing-out item-nav logout-nav" onClick={LogoutUser}>
-  Sign out
-</button> */
-}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePostActions } from "../../hooks/usePostActions";
 import { useSelector } from "react-redux";
 import FileUploader from "../../shared/FileUploader";
+import "./Module.scss";
 
 export const Post = () => {
   const user = useSelector((state) => state.users.auth.user);
@@ -41,7 +42,13 @@ export const Post = () => {
     <div className="container-create">
       <div className="create">
         <div className="title-create">
-          <h2>Crear Post</h2>
+          <img
+            src="/assets/icons/add-post.svg"
+            width={36}
+            height={36}
+            alt="add"
+          />
+          <h2>Create Post</h2>
         </div>
 
         <form
@@ -49,9 +56,9 @@ export const Post = () => {
           encType="multipart/form-data"
           className="form-create"
         >
-          <div className="container-cols-create">
-            <label>Descripcion:</label>
-            <input
+          <div className="container-post">
+            <label className="desc-post">Caption:</label>
+            <textarea
               type="text"
               name="descripcion"
               value={formData.descripcion}
@@ -59,19 +66,16 @@ export const Post = () => {
               className="form-input"
             />
 
-            <label>Post:</label>
-            <div
-              className="img"
-              style={{ backgroundColor: "red", width: "10em" }}
-            >
-              <FileUploader
-                name="publicacion"
-                fieldChange={handleFileChange}
-                mediaUrl=""
-              />
-            </div>
+            <label className="desc-post">Add Phothos</label>
 
-            <button className="button-create" type="submit">
+            <FileUploader
+              name="publicacion"
+              fieldChange={handleFileChange}
+              mediaUrl=""
+            />
+          </div>
+          <div className="container-create-post">
+            <button className="button-create-post" type="submit">
               Crear Post
             </button>
           </div>
