@@ -2,22 +2,27 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "../pages/Home/Home";
 import { Register } from "../pages/Register/Register";
 import { Dashboard } from "../pages/Dashboard/Dashbord";
-import { Nav } from "../components/Nav/Nav";
-import { useValidators } from "../hooks/useValidators";
 import { Login } from "../pages/Login/Login";
+import { Post } from "../pages/CreatePost/Post";
+import { RootLayout } from "../pages/RootLayout";
+import { AuthLayout } from "../pages/AuthLayout";
 
 export const AppRouter = () => {
-  const { isUserAuthenticated } = useValidators();
   return (
     <>
-      {isUserAuthenticated() && <Nav />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/registro-usuario" element={<Register />} />
-        <Route path="/login-usuario" element={<Login />} />
-        <Route path="/dashboard" element={
-          isUserAuthenticated() ? <Dashboard /> : <>error pa</> 
-        } />
+        {/* Public routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/register-user" element={<Register />} />
+          <Route path="/login-user" element={<Login />} />
+        </Route>
+
+        {/* Private routes */}
+        <Route element={<RootLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-post" element={<Post />} />
+        </Route>
       </Routes>
     </>
   );

@@ -1,0 +1,93 @@
+.leftsidebar {
+  background-color: #09090a;
+  min-width: 270px;
+  font-family: cursive;
+}
+
+.logo {
+  margin-bottom: 2.5em;
+}
+
+.items-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 1.5rem;
+  height: auto;
+}
+
+.info-user {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+  .user-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .tag-name {
+    font-size: 15px;
+    color: #7878a3;
+  }
+  img {
+    margin: 0 1em 0 0;
+  }
+}
+
+.options-nav {
+  .leftsidebar-link {
+    text-decoration: none;
+    .hover-items {
+      background-color: #877eff;
+    }
+    .nav-link {
+      padding: 1em;
+      border-radius: 10px;
+      margin-bottom: 1em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #877eff;
+
+        img {
+          filter: brightness(0) invert(1);
+          transition: filter 0.3s ease;
+        }
+      }
+      img {
+        margin: 0 1em 0 0;
+        width: 1.8em;
+      }
+      .icon-nav {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+    }
+  }
+}
+
+.button-logout {
+  padding: 1em;
+  border-radius: 10px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border: none;
+  margin-top: 3em;
+
+
+  p {
+    color: #fff;
+    font-family: cursive;
+    font-size: 15px;
+  }
+
+  img {
+    margin: 0 1.1em 0 0;
+    width: 2.3em;
+  }
+}
