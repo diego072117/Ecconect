@@ -27,7 +27,7 @@ export const Login = () => {
   const user = useSelector((state) => state.users.auth.access_token);
   useEffect(() => {
     if (user != false) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, [user]);
 

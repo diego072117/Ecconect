@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 // Función para obtener la información de autenticación desde el Local Storage
@@ -67,24 +68,12 @@ export const usersSlice = createSlice({
       })
       .addCase(registerUserAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        console.log("exito pa");
-        // Swal.fire({
-        //   icon: "success",
-        //   title: "Registro exitoso",
-        //   text: "El usuario se ha registrado exitosamente.",
-        // }).then(() => {
-        //   window.location.href = "/login";
-        // });
+        toast.success("Successfully!");
       })
       .addCase(registerUserAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log("error");
-        // Swal.fire({
-        //   icon: "error",
-        //   title: "Error",
-        //   text: "Error al registrar el usuario.",
-        // });
+        toast.error("This didn't work.");
       })
       .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";
@@ -92,12 +81,12 @@ export const usersSlice = createSlice({
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.auth = action.payload;
-        console.log("exito login");
+        toast.success("Successfully!");
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log("error");
+        toast.error("This didn't work.");
       });
   },
 });

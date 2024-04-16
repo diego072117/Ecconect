@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import toast from 'react-hot-toast';
 import axios from "axios";
 
 const initialState = {
@@ -50,12 +51,12 @@ const postsSlice = createSlice({
       })
       .addCase(createPostAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        console.log('exitoo');
+        toast.success('Successfully!')
       })
       .addCase(createPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log('paila');
+        toast.error("This didn't work.")
       })
       .addCase(getAllPostAsync.pending, (state,) => {
         state.status = "loading";
@@ -63,12 +64,10 @@ const postsSlice = createSlice({
       .addCase(getAllPostAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.posts = action.payload;
-        console.log('exitoo');
       })
       .addCase(getAllPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log('paila');
       })
       
   },
