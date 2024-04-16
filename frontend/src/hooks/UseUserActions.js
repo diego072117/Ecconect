@@ -20,7 +20,7 @@ export const UseUserActions = () => {
 
   const LogoutUser = () => {
     dispatch(logout());
-    navigate("/");
+    navigate("/login-user");
   };
 
   return { NewUser, LoginUser, LogoutUser };

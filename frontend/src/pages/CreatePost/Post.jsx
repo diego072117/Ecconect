@@ -63,7 +63,7 @@ export const Post = () => {
               name="descripcion"
               value={formData.descripcion}
               onChange={handleInputChange}
-              className="form-input"
+              className="form-input-create"
             />
 
             <label className="desc-post">Add Phothos</label>
