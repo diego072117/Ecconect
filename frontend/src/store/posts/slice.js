@@ -24,6 +24,20 @@ export const createPostAsync = createAsyncThunk(
   }
 );
 
+export const getAllPostAsync = createAsyncThunk(
+  "post/getAllPost",
+  async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/Posts/GetPosts"
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 
 const postsSlice = createSlice({
   name: "posts",
@@ -39,6 +53,19 @@ const postsSlice = createSlice({
         console.log('exitoo');
       })
       .addCase(createPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        console.log('paila');
+      })
+      .addCase(getAllPostAsync.pending, (state,) => {
+        state.status = "loading";
+      })
+      .addCase(getAllPostAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts = action.payload;
+        console.log('exitoo');
+      })
+      .addCase(getAllPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
         console.log('paila');

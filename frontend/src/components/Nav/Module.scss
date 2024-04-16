@@ -5,7 +5,16 @@
 }
 
 .logo {
-  margin-bottom: 2.5em;
+  margin-bottom: 1.5em;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+  img {
+    margin: 0 12px 0 0;
+  }
 }
 
 .items-nav {
@@ -78,7 +87,7 @@
   align-items: center;
   border: none;
   margin-top: 3em;
-
+  cursor: pointer;
 
   p {
     color: #fff;

@@ -11,7 +11,17 @@ export const Nav = () => {
   return (
     <nav className="leftsidebar">
       <div className="items-nav">
-        <Link to="/">
+        <Link to="/" className="logo">
+          <img
+            src="/assets/icons/favicon.ico"
+            alt="logo"
+            width={30}
+            height={30}
+            //className="logo"
+          />
+          Econnect
+        </Link>
+        {/* <Link to="/">
           <img
             src="/assets/images/logo.svg"
             alt="logo"
@@ -19,7 +29,7 @@ export const Nav = () => {
             height={36}
             className="logo"
           />
-        </Link>
+        </Link> */}
         <Link to={`/profile/${user.id}`} className="info-user">
           <img
             src="/assets/icons/profile-placeholder.svg"
@@ -27,7 +37,9 @@ export const Nav = () => {
             className="h-14 w-14 rounded-full"
           />
           <div className="flex flex-col">
-            <p className="user-name">{user.name} {user.lastName}</p>
+            <p className="user-name">
+              {user.name} {user.lastName}
+            </p>
             <p className="tag-name">@{user.name}</p>
           </div>
         </Link>
