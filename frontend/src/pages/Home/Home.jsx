@@ -13,7 +13,7 @@ export const Home = () => {
 
   return(
     <div className="dashboard">
-      soy el home
+      soy el home home
     </div>
   );
 };
