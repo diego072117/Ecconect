@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-body,p{
+body,p,ul,h2{
     margin: 0;
     padding: 0;
 }
@@ -9,13 +9,32 @@ body,p{
     width: 100vw; 
     height: 100vh; 
     display: flex;
-  }
+}
   
-  .layout-content {
+.layout-content {
     flex: 1; 
     overflow-y: auto;
     background-color: #000;
+}
+
+.bottom-bar,
+.container-topbar{
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .layout{
+    display: block;
   }
+  .leftsidebar{
+    display: none;
+  }  
+  .bottom-bar,
+  .container-topbar{
+    display: flex;
+  }  
+}
+
 
 ::-webkit-scrollbar {
     width: 3px;

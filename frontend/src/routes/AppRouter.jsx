@@ -12,11 +12,13 @@ import { Toaster } from "react-hot-toast";
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (isUserAuthenticated) {
-      navigate("/login-user");
-    }
-  }, []);
+  
+  // useEffect(() => {
+  //   if (isUserAuthenticated()) {
+  //     navigate("/");
+  //   }
+  // }, [isUserAuthenticated, navigate]);
+
   return (
     <>
       <Routes>

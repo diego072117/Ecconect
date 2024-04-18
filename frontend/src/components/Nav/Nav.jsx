@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { UseUserActions } from "../../hooks/UseUserActions";
-import "./Module.scss";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../../constants";
+import "./Module.scss";
 
 export const Nav = () => {
   const { LogoutUser } = UseUserActions();
