@@ -1,0 +1,43 @@
+.container-topbar {
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em;
+  font-family: "Inter";
+  border-bottom: 1px solid rgba(31, 31, 34, 1);
+  background-color: #09090a;
+  position: fixed;
+  width: 94%;
+  @media (max-width: 350px) {
+    width: 91%;
+  }
+
+  .topbar-session {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-topbar {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    img {
+      margin: 0 2px;
+    }
+  }
+}
+
+.exit-topbar {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.user-topbar{
+    width: 2.5em;
+    margin-left: 1em;
+}

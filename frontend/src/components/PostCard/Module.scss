@@ -1,0 +1,53 @@
+.container-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #09090a;
+  border-radius: 1.5rem;
+  padding: 2em;
+  border: 1px solid rgba(31, 31, 34, 1);
+  width: 100%;
+  max-width: 570px;
+  margin: 1em;
+  font-family: "Inter";
+}
+
+.user-create-post {
+  display: flex;
+  margin-bottom: 2em;
+  img {
+    margin-right: 1em;
+  }
+
+  .info-post {
+    .user-post {
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .date-post {
+      font-family: 18px;
+      color: #7878a3;
+    }
+  }
+}
+
+.description-post {
+  color: #fff;
+  margin-bottom: 1.5em;
+}
+
+.img-post-home {
+  border-radius: 1.5em;
+  margin-bottom: 1.25rem;
+  height: 30rem;
+  width: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .img-post-home {
+    height: 17rem;
+  }
+}

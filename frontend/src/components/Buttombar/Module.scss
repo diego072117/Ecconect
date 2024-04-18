@@ -1,0 +1,39 @@
+.bottom-bar {
+  border-top: 1px solid rgba(31, 31, 34, 1);
+  background-color: #09090a;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  width: 96%;
+  position: fixed;
+  bottom: 0;
+  font-family: "Inter";
+  @media (max-width: 350px) {
+    width: 91%;
+  }
+  .selected-item {
+    background-color: #877eff;
+  }
+}
+
+.buttombar-link {
+  text-align: center;
+  text-decoration: none;
+  padding: 1em;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 10px;
+  transition: background-color 0.3s ease;
+  .icon-buttom-nav {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
+  &:hover {
+    background-color: #877eff;
+
+    img {
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+  }
+}
