@@ -8,6 +8,7 @@ export const usePostActions = () => {
 
   const createPost = (postData) => {
     dispatch(createPostAsync(postData));
+    navigate("/login-user");
   };
 
   const listPosts = () => {
