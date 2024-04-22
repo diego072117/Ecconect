@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { Home } from "../pages/Home/Home";
 import { Register } from "../pages/Register/Register";
 import { Post } from "../pages/CreatePost/Post";
@@ -31,7 +31,7 @@ export const AppRouter = () => {
         {/* Private routes */}
         <Route
           element={
-            isUserAuthenticated() ? <RootLayout /> : <div>NO ACCESO</div>
+            isUserAuthenticated() ? <RootLayout /> : <Navigate to="/login-user" />
           }
         >
           <Route path="/" element={<Home />} />
