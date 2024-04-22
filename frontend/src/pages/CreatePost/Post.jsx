@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { usePostActions } from "../../hooks/usePostActions";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import FileUploader from "../../shared/FileUploader";
 import "./Module.scss";
 
 export const Post = () => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.users.auth.user);
   const { createPost } = usePostActions();
   const [formData, setFormData] = useState({
@@ -13,7 +15,7 @@ export const Post = () => {
     id_usuarioCreador: user.id,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formDataToSend = new FormData();
@@ -25,7 +27,10 @@ export const Post = () => {
     }
 
     // Es porque así es el formato del FormData, esa es una clase que tiene un formato especial.
-    createPost(formDataToSend);
+    const response = await createPost(formDataToSend);
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/");
+    }
   };
 
   // donde está el console.log?

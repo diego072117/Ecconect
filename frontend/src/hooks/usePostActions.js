@@ -6,9 +6,8 @@ export const usePostActions = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const createPost = (postData) => {
-    dispatch(createPostAsync(postData));
-    navigate("/login-user");
+  const createPost = async (postData) => {
+    return dispatch(createPostAsync(postData));
   };
 
   const listPosts = () => {
