@@ -6,18 +6,10 @@ import { RootLayout } from "../pages/RootLayout";
 import { AuthLayout } from "../pages/AuthLayout";
 import { useValidators } from "../hooks/useValidators";
 import { Login } from "../pages/Login/Login";
-import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
-  const navigate = useNavigate();
-  
-  // useEffect(() => {
-  //   if (isUserAuthenticated()) {
-  //     navigate("/");
-  //   }
-  // }, [isUserAuthenticated, navigate]);
 
   return (
     <>
