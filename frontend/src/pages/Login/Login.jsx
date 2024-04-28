@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { UseUserActions } from "../../hooks/UseUserActions";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Loader } from "../../shared/Loader";
 import "./Module.scss";
 
 export const Login = () => {
@@ -71,7 +72,7 @@ export const Login = () => {
           disabled={status === "loading"}
           type="submit"
         >
-          {status === "loading" ? "Cargando..." : "Sign in"}
+          {status === "loading" ? <Loader /> : "Sign in"}
         </button>
       </form>
       <div className="link-register">
