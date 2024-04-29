@@ -35,6 +35,25 @@ body,p,ul,h2{
   }  
 }
 
+.auth-layout {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.auth-layout > section {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  background-color: #000;
+}
+
+.img-login {
+  flex: 1; 
+  object-fit: cover; 
+}
 
 ::-webkit-scrollbar {
     width: 3px;

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { UseUserActions } from "../../hooks/UseUserActions";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Loader } from "../../shared/Loader";
+import "./Module.scss";
 
 export const Login = () => {
   const { LoginUser } = UseUserActions();
@@ -33,39 +35,53 @@ export const Login = () => {
 
   return (
     <div className="container-login">
-      <div className="login">
-        <div className="info-login">
-          <i className="fa-solid fa-earth-americas"></i>
-          <h2>Sign in to Econnect</h2>
+      <div className="info-login">
+        <i className="fa-solid fa-earth-americas"></i>
+        <div className="logo">
+          <img
+            src="/assets/icons/favicon.ico"
+            alt="logo"
+            width={30}
+            height={30}
+          />
+          Econnect
         </div>
+      </div>
 
-        <form className="form-login" onSubmit={handleSubmit}>
-          <label className="title-input">Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className="form-input"
-          />
+      <form className="form-login" onSubmit={handleSubmit}>
+        <label className="title-input">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="form-input"
+        />
 
-          <label className="title-input">Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            className="form-input"
-          />
+        <label className="title-input">Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          className="form-input"
+        />
 
-          <button
-            className="button-login"
-            disabled={status === "loading"}
-            type="submit"
-          >
-            {status === "loading" ? "Cargando..." : "Sign in"}
-          </button>
-        </form>
+        <button
+          className="button-login"
+          disabled={status === "loading"}
+          type="submit"
+        >
+          {status === "loading" ? <Loader /> : "Sign in"}
+        </button>
+      </form>
+      <div className="link-register">
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register-user" className="link">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
