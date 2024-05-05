@@ -22,19 +22,6 @@ body,p,ul,h2{
   display: none;
 }
 
-@media (max-width: 768px) {
-  .layout{
-    display: block;
-  }
-  .leftsidebar{
-    display: none;
-  }  
-  .bottom-bar,
-  .container-topbar{
-    display: flex;
-  }  
-}
-
 .auth-layout {
   display: flex;
   justify-content: space-between;
@@ -53,6 +40,23 @@ body,p,ul,h2{
 .img-login {
   flex: 1; 
   object-fit: cover; 
+}
+
+@media (max-width: 768px) {
+  .layout{
+    display: block;
+  }
+  .leftsidebar{
+    display: none;
+  }  
+  .bottom-bar,
+  .container-topbar{
+    display: flex;
+  }  
+
+  .img-login{
+    display: none;
+  }
 }
 
 ::-webkit-scrollbar {

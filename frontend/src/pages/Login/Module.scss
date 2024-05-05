@@ -1,8 +1,11 @@
 .container-login {
+  display: flex;
+  flex-direction: column;
   font-family: "Inter";
-  width: 100%;
   color: #fff;
-  padding: 0 11em;
+  width: 100%;
+  max-width: 25em;
+
   .info-login {
     display: flex;
     justify-content: center;
@@ -24,7 +27,7 @@
       padding: 1em;
       border-radius: 8px;
       font-size: 1em;
-
+      
       &:focus {
         border: 0.1em solid #877eff;
         outline: none;
@@ -48,3 +51,6 @@
     }
   }
 }
+
+
+
