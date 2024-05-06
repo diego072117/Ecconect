@@ -14,6 +14,7 @@ body,p,ul,h2{
 .layout-content {
     flex: 1; 
     overflow-y: auto;
+    height: 100vh;
     background-color: #000;
 }
 

@@ -7,6 +7,7 @@ import { AuthLayout } from "../pages/AuthLayout";
 import { useValidators } from "../hooks/useValidators";
 import { Login } from "../pages/Login/Login";
 import { Toaster } from "react-hot-toast";
+import { Profile } from "../pages/Profile/Profile";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -23,11 +24,16 @@ export const AppRouter = () => {
         {/* Private routes */}
         <Route
           element={
-            isUserAuthenticated() ? <RootLayout /> : <Navigate to="/login-user" />
+            isUserAuthenticated() ? (
+              <RootLayout />
+            ) : (
+              <Navigate to="/login-user" />
+            )
           }
         >
           <Route path="/" element={<Home />} />
           <Route path="/create-post" element={<Post />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Route>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

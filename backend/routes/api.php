@@ -25,4 +25,5 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::post('/CreatePost', 'createPost');
     Route::get('/GetPosts', 'getAllPosts');
     Route::post('/SavePost', 'savePost');
+    Route::get('/PostByUser/{id}', 'getPostByUser');
 });
