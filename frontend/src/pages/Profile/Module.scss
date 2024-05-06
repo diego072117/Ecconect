@@ -62,15 +62,6 @@
   }
 }
 
-@media (max-width: 850px) {
-  .info-profile,
-  .user-profile {
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
-}
-
 .options-profile {
   display: flex;
   justify-content: center;
@@ -122,4 +113,17 @@
   justify-content: center;
   font-family: "Inter";
   margin: 3em;
+}
+
+
+@media (max-width: 850px) {
+  .info-profile,
+  .user-profile {
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  .buttons-actions-profile{
+    justify-content: center;
+  }
 }
