@@ -3,6 +3,7 @@
 namespace App\Models\Posts;
 
 use App\Models\Usuarios\Usuario;
+use App\Models\Posts\SavePost;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,5 +23,10 @@ class Posts extends Model
     public function usuarioCreador()
     {
         return $this->belongsTo(Usuario::class, 'id_usuarioCreador');
+    }
+
+    public function savedByUsers()
+    {
+        return $this->hasMany(SavePost::class, 'post_id');
     }
 }

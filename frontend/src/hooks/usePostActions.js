@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createPostAsync, getAllPostAsync } from "../store/posts/slice";
+import { createPostAsync, getAllPostAsync, getPostById } from "../store/posts/slice";
 
 export const usePostActions = () => {
   const dispatch = useDispatch();
@@ -14,5 +14,9 @@ export const usePostActions = () => {
     dispatch(getAllPostAsync());
   };
 
-  return { createPost, listPosts };
+  const listPostsByUser = (id) => {
+    dispatch(getPostById(id));
+  };
+
+  return { createPost, listPosts, listPostsByUser };
 };

@@ -3,6 +3,7 @@
 namespace App\Models\Usuarios;
 
 use App\Models\Posts\Posts;
+use App\Models\Posts\SavePost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -30,6 +31,11 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->hasMany(Posts::class, 'id_usuarioCreador');
     }
 
+    public function savedPosts()
+    {
+        return $this->hasMany(SavePost::class, 'user_id');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -39,6 +45,4 @@ class Usuario extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
-
 }

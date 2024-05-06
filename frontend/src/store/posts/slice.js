@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
+  postsByUser: [],
   postById: null,
   status: "idle",
   error: null,
@@ -39,6 +40,20 @@ export const getAllPostAsync = createAsyncThunk(
   }
 );
 
+export const getPostById = createAsyncThunk(
+  "post/getPostById",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/Posts/PostByUser/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 
 const postsSlice = createSlice({
   name: "posts",
@@ -66,6 +81,17 @@ const postsSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(getAllPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(getPostById.pending, (state,) => {
+        state.status = "loading";
+      })
+      .addCase(getPostById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.postsByUser = action.payload;
+      })
+      .addCase(getPostById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })

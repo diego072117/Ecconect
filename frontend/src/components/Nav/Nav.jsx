@@ -21,15 +21,6 @@ export const Nav = () => {
           />
           Econnect
         </Link>
-        {/* <Link to="/">
-          <img
-            src="/assets/images/logo.svg"
-            alt="logo"
-            width={170}
-            height={36}
-            className="logo"
-          />
-        </Link> */}
         <Link to={`/profile/${user.id}`} className="info-user">
           <img
             src="/assets/icons/profile-placeholder.svg"

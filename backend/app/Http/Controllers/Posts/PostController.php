@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Posts;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePost;
 use App\Models\Posts\Posts;
+use App\Models\Posts\SavePost;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -33,5 +35,26 @@ class PostController extends Controller
         $posts->load('usuarioCreador');
 
         return response()->json(['posts' => $posts], 200);
+    }
+
+    public function getPostByUser($userId)
+    {
+        // Filtra los posts por el user_id proporcionado
+        $posts = Posts::where('id_usuarioCreador', $userId)->orderBy('created_at', 'DESC')->get();
+
+        return response()->json(['posts' => $posts], 200);
+    }
+
+    public function savePost(Request $request)
+    {
+        // $validatedData = $request->validate([
+        //     'user_id' => 'required|exists:users,id',
+        //     'post_id' => 'required|exists:posts,id'
+        // ]);
+
+        $savedPost = new SavePost($request->all());
+        $savedPost->save();
+
+        return response()->json(['message' => 'Post guardado con éxito'], 201);
     }
 }
