@@ -12,8 +12,6 @@ export const PostByUser = ({ userId }) => {
     listPostsByUser(userId);
   }, []);
 
-  console.log(postsByUser.posts);
-
   if (!postsByUser.posts) return <Loader />;
 
   return (

@@ -7,6 +7,7 @@ import { ListPostByUser } from "../../components/LikedPostByUser/ListPostByUser"
 
 export const Profile = () => {
   const user = useSelector((state) => state.users.auth.user);
+  const { postsByUser } = useSelector((state) => state.posts);
   const [split, setSplit] = useState(true);
 
   const handlePostLiked = () => {
@@ -34,7 +35,7 @@ export const Profile = () => {
               <p className="tag-name">@{user.name}</p>
               <div className="info-acount">
                 <p className="posts">
-                  <span>1</span> Posts
+                  <span>{postsByUser.posts?.length}</span> Posts
                 </p>
                 <p className="followers">
                   <span>20</span> Followers
