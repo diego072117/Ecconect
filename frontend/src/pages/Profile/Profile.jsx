@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import "./Module.scss";
 import { Link } from "react-router-dom";
 import { PostByUser } from "../../components/PostByUser/PostByUser";
 import { useState } from "react";
 import { ListPostByUser } from "../../components/LikedPostByUser/ListPostByUser";
+import "./Module.scss";
 
 export const Profile = () => {
   const user = useSelector((state) => state.users.auth.user);
@@ -24,15 +24,15 @@ export const Profile = () => {
         <div className="info-profile">
           <div className="user-profile">
             <img
-              src="/assets/icons/profile-placeholder.svg"
+              src={user.avatar ? `http://127.0.0.1:8000/storage/${user.avatar}` : "/assets/icons/profile-placeholder.svg"}
               alt="profile"
               className="img-avatar"
             />
             <div className="info-user-profile">
               <p className="user-name">
-                {user.name} {user.lastName}
+                {user.name}
               </p>
-              <p className="tag-name">@{user.name}</p>
+              <p className="tag-name">@{user.username}</p>
               <div className="info-acount">
                 <p className="posts">
                   <span>{postsByUser.posts?.length}</span> Posts

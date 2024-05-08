@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUser extends FormRequest
+class UpdateUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class CreateUser extends FormRequest
         return [
             'name' => ['required', 'string'],
             'username' => ['required', 'string'],
-            'email' =>  ['required', 'email', 'unique:usuarios'],
+            'email' =>  ['required', 'email'],
             'telefono' => ['required', 'string'],
-            'password' => ['required', 'string'],
         ];
     }
 
@@ -42,14 +41,9 @@ class CreateUser extends FormRequest
 
             'email.required' => 'El correo es requerido.',
             'email.email' => 'El correo debe tener un formato válido.',
-            'email.unique' => 'El correo ya está registrado en la base de datos.',
 
             'telefono.required' => 'El teléfono es requerido.',
-            'telefono.string' => 'El teléfono debe ser una cadena de texto.',
-
-            'password.required' => 'La contraseña es requerida.',
-            'password.string' => 'La contraseña debe ser una cadena de texto.',
-
+            'telefono.string' => 'El teléfono debe ser una cadena de texto.'
         ];
     }
 }

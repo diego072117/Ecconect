@@ -3,6 +3,7 @@ import {
   loginUserAsync,
   logout,
   registerUserAsync,
+  updateUserAsync,
 } from "../store/users/slice";
 import { useNavigate } from "react-router-dom";
 
@@ -18,10 +19,14 @@ export const UseUserActions = () => {
     dispatch(loginUserAsync(userData));
   };
 
+  const updateUser = (userData, id) => {
+    dispatch(updateUserAsync(userData, id));
+  };
+
   const LogoutUser = () => {
     dispatch(logout());
     navigate("/login-user");
   };
 
-  return { NewUser, LoginUser, LogoutUser };
+  return { NewUser, LoginUser, LogoutUser, updateUser };
 };
