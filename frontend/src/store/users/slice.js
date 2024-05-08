@@ -50,6 +50,35 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
+export const updateUserAsync = createAsyncThunk(
+  "users/updateUser",
+  async (userData, { getState }) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:8000/api/Users/UpdateUser/${userData.get('id')}`,
+        userData
+      );
+     
+      const updatedUserData = response.data;
+
+      // Actualizar localStorage con los nuevos datos del usuario
+      const { access_token } = getState().users.auth;
+
+
+      const authData = {
+        access_token: access_token,
+        user: updatedUserData,
+      };
+
+      localStorage.setItem("auth", JSON.stringify(authData));
+
+      return updatedUserData;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 export const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -87,7 +116,20 @@ export const usersSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");
-      });
+      })
+      .addCase(updateUserAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.auth.user = action.payload;
+        toast.success("Successfully!");
+      })
+      .addCase(updateUserAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
+      })
   },
 });
 

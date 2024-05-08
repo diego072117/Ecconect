@@ -23,15 +23,18 @@ export const Nav = () => {
         </Link>
         <Link to={`/profile/${user.id}`} className="info-user">
           <img
-            src="/assets/icons/profile-placeholder.svg"
+            src={
+              user.avatar
+                ? `http://127.0.0.1:8000/storage/${user.avatar}`
+                : "/assets/icons/profile-placeholder.svg"
+            }
+            //"/assets/icons/profile-placeholder.svg"
             alt="profile"
             className="h-14 w-14 rounded-full"
           />
           <div className="flex flex-col">
-            <p className="user-name">
-              {user.name} {user.lastName}
-            </p>
-            <p className="tag-name">@{user.name}</p>
+            <p className="user-name">{user.name}</p>
+            <p className="tag-name">@{user.username}</p>
           </div>
         </Link>
         <div className="flex flex-col gap-6 options-nav">

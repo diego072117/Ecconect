@@ -1,0 +1,75 @@
+.container-update-user {
+  font-family: "Inter";
+  display: flex;
+  justify-content: center;
+  margin: 3em;
+}
+
+.info-update-profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 63em;
+
+  .title-update-profile {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 2.5em;
+    font-size: 20px;
+    img {
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .container-uploader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2em;
+
+    img {
+      width: 96px;
+      height: 96px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .user-update-profile {
+    display: flex;
+    flex-direction: column;
+    color: #877eff;
+
+    label {
+      color: #fff;
+      margin-bottom: 5px;
+    }
+  }
+
+  .buttons-update-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .button {
+      border: none;
+      border-radius: 5px;
+      padding: 16px 20px;
+      color: #fff;
+      font-weight: 600;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .update {
+      background-color: #877eff;
+    }
+
+    .cancel {
+      background-color: #1f1f22;
+    }
+  }
+}

@@ -6,11 +6,16 @@ export const PostCard = ({ post }) => {
     new Date(post.created_at),
     "MMM d, yyyy 'at' hh:mm a"
   );
+
   return (
     <div className="container-card">
       <div className="user-create-post">
         <img
-          src="/assets/icons/profile-placeholder.svg"
+          src={
+            post.usuario_creador.avatar
+              ? `http://127.0.0.1:8000/storage/${post.usuario_creador.avatar}`
+              : "/assets/icons/profile-placeholder.svg"
+          }
           alt="profile"
           className="h-14 w-14 rounded-full"
         />

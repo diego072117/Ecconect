@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUser;
+use App\Http\Requests\User\UpdateUser;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -45,4 +46,28 @@ class UsuarioController extends Controller
         ]);
     }
 
+    public function updateUser(UpdateUser $request, $id)
+    {
+        $user = Usuario::findOrFail($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        //$newUserInfo = collect($request->all());
+
+        $validatedData = $request->validated();
+
+        // Actualizar el avatar si se proporciona uno nuevo
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->storeAs('avatars', 'avatar_' . $user->id . '_' . time() . '.' . $avatar->getClientOriginalExtension(), 'public');
+            $validatedData['avatar'] = $avatarPath;
+        }
+
+        // Actualizar el usuario con los datos validados
+        $user->update($validatedData);
+
+        return $user;
+    }
 }

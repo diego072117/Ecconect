@@ -11,8 +11,7 @@ export const Register = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    lastName: "",
-    numeroDocumento: "",
+    username: "",
     email: "",
     telefono: "",
     password: "",
@@ -43,7 +42,7 @@ export const Register = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit} className="form-login">
-        <label>Nombre:</label>
+        <label>Name:</label>
         <input
           type="text"
           name="name"
@@ -51,7 +50,17 @@ export const Register = () => {
           onChange={handleInputChange}
           className="form-input"
         />
-        <label>Correo Electrónico:</label>
+
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
+          className="form-input"
+        />
+
+        <label>Email:</label>
         <input
           type="email"
           name="email"
@@ -60,15 +69,7 @@ export const Register = () => {
           className="form-input"
         />
 
-        <label>Apellido:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
-          className="form-input"
-        />
-        <label>Contraseña:</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -76,7 +77,7 @@ export const Register = () => {
           onChange={handleInputChange}
           className="form-input"
         />
-        <label>Teléfono:</label>
+        <label>Phone:</label>
         <input
           type="number"
           name="telefono"
