@@ -26,8 +26,6 @@ export const Post = () => {
       formDataToSend.append(key, formData[key]);
     }
 
-
-    // Es porque así es el formato del FormData, esa es una clase que tiene un formato especial.
     const response = await createPost(formDataToSend);
     if (response.meta.requestStatus === "fulfilled") {
       navigate("/");

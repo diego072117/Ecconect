@@ -19,8 +19,8 @@ export const UseUserActions = () => {
     dispatch(loginUserAsync(userData));
   };
 
-  const updateUser = (userData, id) => {
-    dispatch(updateUserAsync(userData, id));
+  const updateUser = async (userData) => {
+    return dispatch(updateUserAsync(userData));
   };
 
   const LogoutUser = () => {

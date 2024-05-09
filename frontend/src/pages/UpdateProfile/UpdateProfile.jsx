@@ -29,11 +29,11 @@ export const UpdateProfile = () => {
       formDataToSend.append(key, userData[key]);
     }
 
-    updateUser(formDataToSend);
-    // // Es porque así es el formato del FormData, esa es una clase que tiene un formato especial.
-    // const response = await createPost(formDataToSend);
-    // if (response.meta.requestStatus === "fulfilled") {
-    //   navigate("/");
+    const response = await updateUser(formDataToSend);
+
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate(-1);
+    }
   };
 
   const handleInputChange = (e) => {

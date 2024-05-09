@@ -11,12 +11,14 @@ const initialState = {
   mensaje: null,
 };
 
+const { VITE_URL_API } = import.meta.env;
+
 export const createPostAsync = createAsyncThunk(
   "post/createPost",
   async (postData) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/Posts/CreatePost",
+        `${VITE_URL_API}/Posts/CreatePost`,
         postData
       );
       return response.data;
@@ -31,7 +33,7 @@ export const getAllPostAsync = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/Posts/GetPosts"
+        `${VITE_URL_API}/Posts/GetPosts`
       );
       return response.data;
     } catch (error) {
@@ -45,7 +47,7 @@ export const getPostById = createAsyncThunk(
   async (id) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/Posts/PostByUser/${id}`
+        `${VITE_URL_API}/Posts/PostByUser/${id}`
       );
       return response.data;
     } catch (error) {
