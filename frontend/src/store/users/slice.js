@@ -15,12 +15,14 @@ const initialState = {
   error: null,
 };
 
+const { VITE_URL_API } = import.meta.env;
+
 export const registerUserAsync = createAsyncThunk(
   "users/registerUser",
   async (userData) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/Users/CreateUser",
+        `${VITE_URL_API}/Users/CreateUser`,
         userData
       );
       return response.data;
@@ -35,7 +37,7 @@ export const loginUserAsync = createAsyncThunk(
   async (userData) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/Users/Login",
+        `${VITE_URL_API}/Users/Login`,
         userData
       );
       const authData = {
@@ -55,7 +57,7 @@ export const updateUserAsync = createAsyncThunk(
   async (userData, { getState }) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/Users/UpdateUser/${userData.get('id')}`,
+        `${VITE_URL_API}/Users/UpdateUser/${userData.get('id')}`,
         userData
       );
      
