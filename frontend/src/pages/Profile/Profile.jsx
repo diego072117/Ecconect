@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { PostByUser } from "../../components/PostByUser/PostByUser";
 import { useState } from "react";
 import { ListPostByUser } from "../../components/LikedPostByUser/ListPostByUser";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const Profile = () => {
@@ -24,7 +25,7 @@ export const Profile = () => {
         <div className="info-profile">
           <div className="user-profile">
             <img
-              src={user.avatar ? `http://127.0.0.1:8000/storage/${user.avatar}` : "/assets/icons/profile-placeholder.svg"}
+              src={user.avatar ? `${VITE_URL_API_IMG}/${user.avatar}` : "/assets/icons/profile-placeholder.svg"}
               alt="profile"
               className="img-avatar"
             />

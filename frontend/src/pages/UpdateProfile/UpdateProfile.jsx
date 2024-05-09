@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UseUserActions } from "../../hooks/UseUserActions";
 import ProfileUploader from "../../shared/ProfileUploader";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const UpdateProfile = () => {
@@ -71,7 +72,7 @@ export const UpdateProfile = () => {
               fieldChange={handleFileChange}
               mediaUrl={
                 user.avatar
-                  ? `http://127.0.0.1:8000/storage/${user.avatar}`
+                  ? `${VITE_URL_API_IMG}/${user.avatar}`
                   : "/assets/icons/profile-placeholder.svg"
               }
             />

@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import { UseUserActions } from "../../hooks/UseUserActions";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../../constants";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const Nav = () => {
   const { LogoutUser } = UseUserActions();
   const { pathname } = useLocation();
   const user = useSelector((state) => state.users.auth.user);
+
   return (
     <nav className="leftsidebar">
       <div className="items-nav">
@@ -25,7 +27,7 @@ export const Nav = () => {
           <img
             src={
               user.avatar
-                ? `http://127.0.0.1:8000/storage/${user.avatar}`
+                ? `${VITE_URL_API_IMG}/${user.avatar}`
                 : "/assets/icons/profile-placeholder.svg"
             }
             //"/assets/icons/profile-placeholder.svg"

@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const PostCard = ({ post }) => {
@@ -13,7 +14,7 @@ export const PostCard = ({ post }) => {
         <img
           src={
             post.usuario_creador.avatar
-              ? `http://127.0.0.1:8000/storage/${post.usuario_creador.avatar}`
+              ? `${VITE_URL_API_IMG}/${post.usuario_creador.avatar}`
               : "/assets/icons/profile-placeholder.svg"
           }
           alt="profile"
@@ -29,7 +30,7 @@ export const PostCard = ({ post }) => {
       </div>
       <img
         className="img-post-home"
-        src={`http://127.0.0.1:8000/storage/${post.publicacion}`}
+        src={`${VITE_URL_API_IMG}/${post.publicacion}`}
         alt=""
       />
     </div>
