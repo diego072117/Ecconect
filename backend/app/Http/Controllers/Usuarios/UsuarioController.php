@@ -24,6 +24,17 @@ class UsuarioController extends Controller
         return response()->json(['message' => 'Usuario registrado con éxito'], 201);
     }
 
+    public function getUserById($id)
+    {
+        $user = Usuario::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        return response()->json($user);
+    }
+
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');

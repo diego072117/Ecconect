@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import {
+  getUserByIdAsync,
   loginUserAsync,
   logout,
   registerUserAsync,
@@ -15,6 +16,10 @@ export const UseUserActions = () => {
     dispatch(registerUserAsync(userData));
   };
 
+  const userbyId = (id) => {
+    dispatch(getUserByIdAsync(id));
+  };
+
   const LoginUser = (userData) => {
     dispatch(loginUserAsync(userData));
   };
@@ -28,5 +33,5 @@ export const UseUserActions = () => {
     navigate("/login-user");
   };
 
-  return { NewUser, LoginUser, LogoutUser, updateUser };
+  return { NewUser, userbyId, LoginUser, LogoutUser, updateUser };
 };
