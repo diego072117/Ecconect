@@ -12,6 +12,7 @@ const authLocal = () => {
 const initialState = {
   auth: authLocal(),
   userById: null,
+  users: [],
   status: "idle",
   error: null,
 };
@@ -46,6 +47,21 @@ export const getUserByIdAsync = createAsyncThunk(
     }
   }
 );
+
+export const getAllUsersAsync = createAsyncThunk(
+  "users/getAllUsers",
+  async () => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Users/GeAlltUsers`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 
 export const loginUserAsync = createAsyncThunk(
   "users/loginUser",
@@ -128,6 +144,18 @@ export const usersSlice = createSlice({
         state.userById = acrion.payload;
       })
       .addCase(getUserByIdAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
+      })
+      .addCase(getAllUsersAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllUsersAsync.fulfilled, (state, acrion) => {
+        state.status = "succeeded";
+        state.users = acrion.payload;
+      })
+      .addCase(getAllUsersAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");

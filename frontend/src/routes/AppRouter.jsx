@@ -9,6 +9,7 @@ import { Login } from "../pages/Login/Login";
 import { Toaster } from "react-hot-toast";
 import { Profile } from "../pages/Profile/Profile";
 import { UpdateProfile } from "../pages/UpdateProfile/UpdateProfile";
+import { People } from "../pages/People/People";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -36,6 +37,7 @@ export const AppRouter = () => {
           <Route path="/create-post" element={<Post />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
+          <Route path="/all-users" element={<People />} />
         </Route>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

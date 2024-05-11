@@ -12,7 +12,7 @@ export const Profile = () => {
   const { id } = useParams();
   const { userbyId } = UseUserActions();
   const userAuth = useSelector((state) => state.users.auth.user);
-  const user = useSelector((state) => state.users.userById);
+  const { userById: user, status } = useSelector((state) => state.users);
   const { postsByUser } = useSelector((state) => state.posts);
   const [split, setSplit] = useState(true);
 
@@ -24,7 +24,12 @@ export const Profile = () => {
     setSplit(!split);
   };
 
-  if (!user) return <Loader />;
+  if (!user || status === "loading")
+    return (
+      <div className="loader">
+        <Loader />
+      </div>
+    );
 
   return (
     <div className="profile-content">

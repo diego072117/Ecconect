@@ -47,7 +47,6 @@ export const UpdateProfile = () => {
   };
 
   return (
-    <div className="container-update-profile">
       <div className="container-update-user">
         <div className="info-update-profile">
           <div className="title-update-profile">
@@ -58,7 +57,7 @@ export const UpdateProfile = () => {
               alt="edit"
               className="invert-white"
             />
-            <h2 className="h3-bold md:h2-bold text-left w-full">
+            <h2>
               Edit Profile
             </h2>
           </div>
@@ -124,6 +123,5 @@ export const UpdateProfile = () => {
           </form>
         </div>
       </div>
-    </div>
   );
 };

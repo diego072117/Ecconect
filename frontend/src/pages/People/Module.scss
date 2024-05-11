@@ -1,0 +1,25 @@
+.container-people {
+  font-family: "Inter";
+  display: flex;
+  justify-content: center;
+  margin: 3em;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+.title-people{
+  color: #fff;
+  margin: 1em;
+  font-size: 20px;
+}
+
+.info-people {
+  width: 67em;
+  max-width: 100%;
+}
+
+.cards-user{
+  display: flex;
+  flex-wrap: wrap;
+}

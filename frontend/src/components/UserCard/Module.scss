@@ -1,0 +1,41 @@
+.card-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 32px 20px;
+  margin: 1em;
+  border-radius: 15px;
+  text-decoration: none;
+  border: 1px solid rgba(31, 31, 34, 1);
+  flex-grow: 1;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    margin-bottom: 1em;
+  }
+  .user-name {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+
+  .username {
+    color: #7878a3;
+    margin-bottom: 1em;
+  }
+
+  .button-follow-user{
+    color: #fff;
+    font-weight: 600;
+    background-color: #877eff;
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: #877eff;
+  }
+}

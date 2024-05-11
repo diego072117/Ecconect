@@ -35,6 +35,13 @@ class UsuarioController extends Controller
         return response()->json($user);
     }
 
+    public function getAllUsers()
+    {
+        $users = Usuario::orderBy('created_at', 'DESC')->get();
+
+        return response()->json($users);
+    }
+
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');

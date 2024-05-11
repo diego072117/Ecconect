@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'Users', 'controller' => UsuarioController::class], function () {
     Route::post('/CreateUser', 'createUser');
     Route::get('/GetUserById/{id}', 'getUserById');
+    Route::get('/GeAlltUsers', 'getAllUsers');
     Route::post('/Login', 'loginUser');
     Route::post('/UpdateUser/{id}', 'updateUser');
 });
