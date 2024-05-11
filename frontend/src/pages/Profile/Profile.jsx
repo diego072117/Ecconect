@@ -64,7 +64,7 @@ export const Profile = () => {
           <div className="edit-profile">
             {userAuth.id == user.id ? (
               <Link
-                to={`/update-profile/${userAuth.$id}`}
+                to={`/update-profile/${userAuth.id}`}
                 className={`edit-button`}
               >
                 <img
