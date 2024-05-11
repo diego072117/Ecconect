@@ -11,6 +11,8 @@ const authLocal = () => {
 // Inicializa el estado usando la función authLocal
 const initialState = {
   auth: authLocal(),
+  userById: null,
+  users: [],
   status: "idle",
   error: null,
 };
@@ -31,6 +33,35 @@ export const registerUserAsync = createAsyncThunk(
     }
   }
 );
+
+export const getUserByIdAsync = createAsyncThunk(
+  "users/getrUserById",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Users/GetUserById/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+export const getAllUsersAsync = createAsyncThunk(
+  "users/getAllUsers",
+  async () => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Users/GeAlltUsers`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 
 export const loginUserAsync = createAsyncThunk(
   "users/loginUser",
@@ -57,15 +88,14 @@ export const updateUserAsync = createAsyncThunk(
   async (userData, { getState }) => {
     try {
       const response = await axios.post(
-        `${VITE_URL_API}/Users/UpdateUser/${userData.get('id')}`,
+        `${VITE_URL_API}/Users/UpdateUser/${userData.get("id")}`,
         userData
       );
-     
+
       const updatedUserData = response.data;
 
       // Actualizar localStorage con los nuevos datos del usuario
       const { access_token } = getState().users.auth;
-
 
       const authData = {
         access_token: access_token,
@@ -106,6 +136,30 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
         toast.error("This didn't work.");
       })
+      .addCase(getUserByIdAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getUserByIdAsync.fulfilled, (state, acrion) => {
+        state.status = "succeeded";
+        state.userById = acrion.payload;
+      })
+      .addCase(getUserByIdAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
+      })
+      .addCase(getAllUsersAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllUsersAsync.fulfilled, (state, acrion) => {
+        state.status = "succeeded";
+        state.users = acrion.payload;
+      })
+      .addCase(getAllUsersAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
+      })
       .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -131,7 +185,7 @@ export const usersSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");
-      })
+      });
   },
 });
 

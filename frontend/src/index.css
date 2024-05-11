@@ -64,6 +64,13 @@ body,p,ul,h2{
   outline: none;
 }
 
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 @media (max-width: 768px) {
   .layout{
     display: block;

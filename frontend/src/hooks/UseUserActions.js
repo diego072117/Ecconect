@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import {
+  getAllUsersAsync,
+  getUserByIdAsync,
   loginUserAsync,
   logout,
   registerUserAsync,
@@ -11,8 +13,16 @@ export const UseUserActions = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const NewUser = (userData) => {
-    dispatch(registerUserAsync(userData));
+  const NewUser = async (userData) => {
+    return dispatch(registerUserAsync(userData));
+  };
+
+  const userbyId = async (id) => {
+    dispatch(getUserByIdAsync(id));
+  };
+
+  const allUsers = () => {
+    dispatch(getAllUsersAsync());
   };
 
   const LoginUser = (userData) => {
@@ -28,5 +38,5 @@ export const UseUserActions = () => {
     navigate("/login-user");
   };
 
-  return { NewUser, LoginUser, LogoutUser, updateUser };
+  return { NewUser, userbyId, allUsers, LoginUser, LogoutUser, updateUser };
 };

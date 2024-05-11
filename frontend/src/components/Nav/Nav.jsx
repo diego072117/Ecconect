@@ -30,9 +30,7 @@ export const Nav = () => {
                 ? `${VITE_URL_API_IMG}/${user.avatar}`
                 : "/assets/icons/profile-placeholder.svg"
             }
-            //"/assets/icons/profile-placeholder.svg"
             alt="profile"
-            className="h-14 w-14 rounded-full"
           />
           <div className="flex flex-col">
             <p className="user-name">{user.name}</p>
