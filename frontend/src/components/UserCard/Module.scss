@@ -4,11 +4,17 @@
   align-items: center;
   flex-direction: column;
   padding: 32px 20px;
+  width: 13em;
   margin: 1em;
   border-radius: 15px;
   text-decoration: none;
   border: 1px solid rgba(31, 31, 34, 1);
   flex-grow: 1;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 
   img {
     object-fit: cover;
@@ -29,7 +35,7 @@
     margin-bottom: 1em;
   }
 
-  .button-follow-user{
+  .button-follow-user {
     color: #fff;
     font-weight: 600;
     background-color: #877eff;

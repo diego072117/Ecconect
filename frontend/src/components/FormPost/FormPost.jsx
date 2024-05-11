@@ -1,0 +1,73 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { usePostActions } from "../../hooks/usePostActions";
+import { useState } from "react";
+import FileUploader from "../../shared/FileUploader";
+
+export const FormPost = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.users.auth.user);
+  const { createPost } = usePostActions();
+  const [formData, setFormData] = useState({
+    descripcion: "",
+    publicacion: null,
+    id_usuarioCreador: user.id,
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formDataToSend = new FormData();
+
+    for (const key in formData) {
+      if (!formData[key]) continue;
+
+      formDataToSend.append(key, formData[key]);
+    }
+
+    const response = await createPost(formDataToSend);
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (name, file) => {
+    setFormData({ ...formData, [name]: file });
+  };
+  return (
+    <form
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+      className="form-create"
+    >
+      <div className="container-post">
+        <label className="desc-post">Caption:</label>
+        <textarea
+          type="text"
+          name="descripcion"
+          value={formData.descripcion}
+          onChange={handleInputChange}
+          className="form-input-create"
+        />
+
+        <label className="desc-post">Add Phothos</label>
+
+        <FileUploader
+          name="publicacion"
+          fieldChange={handleFileChange}
+          mediaUrl=""
+        />
+      </div>
+      <div className="container-create-post">
+        <button className="button-create-post" type="submit">
+          Crear Post
+        </button>
+      </div>
+    </form>
+  );
+};

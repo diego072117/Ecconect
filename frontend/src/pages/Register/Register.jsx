@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { UseUserActions } from "../../hooks/UseUserActions";
-import "./Module.scss";
 import { useSelector } from "react-redux";
 import { Loader } from "../../shared/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./Module.scss";
 
 export const Register = () => {
+  const navigate = useNavigate();
   const { NewUser } = UseUserActions();
   const { status } = useSelector((state) => state.users);
 
@@ -17,9 +18,12 @@ export const Register = () => {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    NewUser(formData);
+    const response = await NewUser(formData);
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate("/login-user");
+    }
   };
 
   const handleInputChange = (e) => {
