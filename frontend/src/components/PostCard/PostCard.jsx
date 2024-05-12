@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
+import { Link } from "react-router-dom";
 
 export const PostCard = ({ post }) => {
   const formattedDate = format(
@@ -18,7 +19,6 @@ export const PostCard = ({ post }) => {
               : "/assets/icons/profile-placeholder.svg"
           }
           alt="profile"
-          className="h-14 w-14 rounded-full"
         />
         <div className="info-post">
           <p className="user-post">{post.usuario_creador.name}</p>
@@ -28,11 +28,13 @@ export const PostCard = ({ post }) => {
       <div className="description-post">
         <p>{post.descripcion}</p>
       </div>
-      <img
-        className="img-post-home"
-        src={`${VITE_URL_API_IMG}/${post.publicacion}`}
-        alt=""
-      />
+      <Link to={`/posts/${post.id}`}>
+        <img
+          className="img-post-home"
+          src={`${VITE_URL_API_IMG}/${post.publicacion}`}
+          alt=""
+        />
+      </Link>
     </div>
   );
 };
