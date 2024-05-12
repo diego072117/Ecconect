@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "../pages/Home/Home";
 import { Register } from "../pages/Register/Register";
 import { Post } from "../pages/CreatePost/Post";
@@ -12,6 +12,7 @@ import { UpdateProfile } from "../pages/UpdateProfile/UpdateProfile";
 import { People } from "../pages/People/People";
 import { Explore } from "../pages/Explore/Explore";
 import { Saved } from "../pages/Saved/Saved";
+import { PostDetails } from "../pages/PostDetails/PostDetails";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -39,6 +40,7 @@ export const AppRouter = () => {
           <Route path="/create-post" element={<Post />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/all-users" element={<People />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/saved" element={<Saved />} />

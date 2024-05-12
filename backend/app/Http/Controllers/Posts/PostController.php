@@ -57,4 +57,18 @@ class PostController extends Controller
 
         return response()->json(['message' => 'Post guardado con éxito'], 201);
     }
+
+    public function getPostById($postId)
+    {
+
+        $post = Posts::findOrFail($postId);
+
+        if (!$post) {
+            return response()->json(['message' => 'El post no fue encontrado'], 404);
+        }
+        
+        $post->load('usuarioCreador');
+
+        return $post;
+    }
 }

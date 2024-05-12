@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Loader } from "../../shared/Loader";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
+import { Link } from "react-router-dom";
 
 export const PostByUser = ({ userId }) => {
   const { listPostsByUser } = usePostActions();
@@ -18,13 +19,14 @@ export const PostByUser = ({ userId }) => {
   return (
     <div className="post-user-container">
       {postsByUser.posts.map((post) => (
-        <div
+        <Link
           key={post.id}
           className="post-user"
+          to={`/posts/${post.id}`} 
           style={{
             backgroundImage: `url(${VITE_URL_API_IMG}/${post.publicacion})`,
           }}
-        ></div>
+        ></Link>
       ))}
     </div>
   );

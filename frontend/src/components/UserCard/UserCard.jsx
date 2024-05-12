@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Module.scss"
 
 export const UserCard = ({ user }) => {
-  console.log(user);
   return (
     <Link className="card-user" to={`/profile/${user.id}`}>
       <img

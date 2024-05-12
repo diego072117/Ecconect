@@ -42,12 +42,27 @@ export const getAllPostAsync = createAsyncThunk(
   }
 );
 
+export const getPostByUserId = createAsyncThunk(
+  "post/getPostByUserId",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Posts/PostByUser/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+
 export const getPostById = createAsyncThunk(
   "post/getPostById",
   async (id) => {
     try {
       const response = await axios.get(
-        `${VITE_URL_API}/Posts/PostByUser/${id}`
+        `${VITE_URL_API}/Posts/GetPostById/${id}`
       );
       return response.data;
     } catch (error) {
@@ -86,18 +101,28 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(getPostByUserId.pending, (state,) => {
+        state.status = "loading";
+      })
+      .addCase(getPostByUserId.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.postsByUser = action.payload;
+      })
+      .addCase(getPostByUserId.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
       .addCase(getPostById.pending, (state,) => {
         state.status = "loading";
       })
       .addCase(getPostById.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.postsByUser = action.payload;
+        state.postById = action.payload;
       })
       .addCase(getPostById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
-      
   },
 });
 
