@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import axios from "axios";
 
 const initialState = {
@@ -28,19 +28,14 @@ export const createPostAsync = createAsyncThunk(
   }
 );
 
-export const getAllPostAsync = createAsyncThunk(
-  "post/getAllPost",
-  async () => {
-    try {
-      const response = await axios.get(
-        `${VITE_URL_API}/Posts/GetPosts`
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(error.message);
-    }
+export const getAllPostAsync = createAsyncThunk("post/getAllPost", async () => {
+  try {
+    const response = await axios.get(`${VITE_URL_API}/Posts/GetPosts`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
   }
-);
+});
 
 export const getPostByUserId = createAsyncThunk(
   "post/getPostByUserId",
@@ -56,13 +51,25 @@ export const getPostByUserId = createAsyncThunk(
   }
 );
 
+export const getPostById = createAsyncThunk("post/getPostById", async (id) => {
+  try {
+    const response = await axios.get(`${VITE_URL_API}/Posts/GetPostById/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
 
-export const getPostById = createAsyncThunk(
-  "post/getPostById",
-  async (id) => {
+export const updatePostAsync = createAsyncThunk(
+  "post/updatePost",
+  async (postData) => {
+    const formDataObject = Object.fromEntries(postData.entries());
+
+    console.log(formDataObject);
     try {
-      const response = await axios.get(
-        `${VITE_URL_API}/Posts/GetPostById/${id}`
+      const response = await axios.post(
+        `${VITE_URL_API}/Posts/UpdatePost/${postData.get("id")}`,
+        postData
       );
       return response.data;
     } catch (error) {
@@ -70,7 +77,6 @@ export const getPostById = createAsyncThunk(
     }
   }
 );
-
 
 const postsSlice = createSlice({
   name: "posts",
@@ -83,14 +89,14 @@ const postsSlice = createSlice({
       })
       .addCase(createPostAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        toast.success('Successfully!')
+        toast.success("Successfully!");
       })
       .addCase(createPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        toast.error("This didn't work.")
+        toast.error("This didn't work.");
       })
-      .addCase(getAllPostAsync.pending, (state,) => {
+      .addCase(getAllPostAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(getAllPostAsync.fulfilled, (state, action) => {
@@ -101,7 +107,7 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(getPostByUserId.pending, (state,) => {
+      .addCase(getPostByUserId.pending, (state) => {
         state.status = "loading";
       })
       .addCase(getPostByUserId.fulfilled, (state, action) => {
@@ -112,7 +118,7 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(getPostById.pending, (state,) => {
+      .addCase(getPostById.pending, (state) => {
         state.status = "loading";
       })
       .addCase(getPostById.fulfilled, (state, action) => {
@@ -123,6 +129,16 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(updatePostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updatePostAsync.fulfilled, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(updatePostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

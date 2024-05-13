@@ -52,16 +52,13 @@ export const getAllUsersAsync = createAsyncThunk(
   "users/getAllUsers",
   async () => {
     try {
-      const response = await axios.get(
-        `${VITE_URL_API}/Users/GeAlltUsers`
-      );
+      const response = await axios.get(`${VITE_URL_API}/Users/GeAlltUsers`);
       return response.data;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 );
-
 
 export const loginUserAsync = createAsyncThunk(
   "users/loginUser",

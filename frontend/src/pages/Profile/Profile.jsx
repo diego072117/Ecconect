@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { PostByUser } from "../../components/PostByUser/PostByUser";
 import { useEffect, useState } from "react";
-import { ListPostByUser } from "../../components/LikedPostByUser/ListPostByUser";
+import { LikedPostByUser } from "../../components/LikedPostByUser/LikedPostByUser";
 const { VITE_URL_API_IMG } = import.meta.env;
 import { UseUserActions } from "../../hooks/UseUserActions";
 import { Loader } from "../../shared/Loader";
@@ -20,9 +20,14 @@ export const Profile = () => {
     userbyId(id);
   }, [id]);
 
-  const handleOptionProfile = () => {
-    setSplit(!split);
+  const handlePostProfile = () => {
+    setSplit(true);
   };
+
+  const handleLikeProfile = () => {
+    setSplit(false);
+  };
+
 
   if (!user || status === "loading")
     return (
@@ -86,8 +91,8 @@ export const Profile = () => {
       <div className="options-profile">
         <div className="buttons-actions-profile">
           <button
-            className={`button ${split ? "active" : "inactive"}`}
-            onClick={handleOptionProfile}
+            className={`button-post-profile ${split ? "active" : "inactive"}`}
+            onClick={handlePostProfile}
           >
             <img
               src={"/assets/icons/posts.svg"}
@@ -98,8 +103,8 @@ export const Profile = () => {
             Posts
           </button>
           <button
-            className={`button-like ${!split ? "active" : "inactive"}`}
-            onClick={handleOptionProfile}
+            className={`button-like-profile ${!split ? "active" : "inactive"}`}
+            onClick={handleLikeProfile}
           >
             <img
               src={"/assets/icons/like.svg"}
@@ -112,7 +117,7 @@ export const Profile = () => {
         </div>
       </div>
       <div className="post-likes">
-        {split ? <PostByUser userId={user.id} /> : <ListPostByUser />}
+        {split ? <PostByUser userId={user.id} /> : <LikedPostByUser />}
       </div>
     </div>
   );

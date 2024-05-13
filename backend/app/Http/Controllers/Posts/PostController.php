@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Posts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePost;
+use App\Http\Requests\Post\UpdatePost;
 use App\Models\Posts\Posts;
 use App\Models\Posts\SavePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -26,6 +28,29 @@ class PostController extends Controller
 
         return response()->json(['message' => 'Post creado con éxito'], 201);
     }
+
+    public function updatePost(UpdatePost $request, $postId)
+    {
+        $post = Posts::findOrFail($postId);
+
+        if (!$post) {
+            return response()->json(['message' => 'El post no fue encontrado'], 404);
+        }
+
+        $validatedData = $request->validated();
+
+        // Verificar si hay una nueva imagen en la solicitud
+        if ($request->hasFile('publicacion')) {
+            $newImage = $request->file('publicacion');
+            $newImagePath = $newImage->storeAs('publicaciones', 'publicacion_' . time() . '.' . $newImage->getClientOriginalExtension(), 'public');
+            $validatedData['publicacion'] = $newImagePath;
+        }
+
+        $post->update($validatedData);
+
+        return response()->json(['message' => 'Post actualizado con éxito'], 200);
+    }
+
     public function getAllPosts()
     {
         // Obtener todos los posts ordenados del más reciente al más viejo
@@ -66,7 +91,7 @@ class PostController extends Controller
         if (!$post) {
             return response()->json(['message' => 'El post no fue encontrado'], 404);
         }
-        
+
         $post->load('usuarioCreador');
 
         return $post;

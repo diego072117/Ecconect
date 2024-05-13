@@ -10,15 +10,14 @@ import "./Module.scss";
 export const PostDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { listPostsById } = usePostActions();
+  const { postsById } = usePostActions();
   const { postById: post, status } = useSelector((state) => state.posts);
   const user = useSelector((state) => state.users.auth.user);
 
   useEffect(() => {
-    listPostsById(id);
+    postsById(id);
   }, [id]);
 
-  console.log(post);
 
   if (!post || status === "loading")
     return (
@@ -69,7 +68,7 @@ export const PostDetails = () => {
             </Link>
             {user.id === post.usuario_creador.id ? (
               <div className="actions-post">
-                <Link to={``} className="icon">
+                <Link to={`/update-post/${post.id}`} className="icon">
                   <img
                     src={"/assets/icons/edit.svg"}
                     alt="edit"

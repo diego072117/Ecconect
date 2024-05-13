@@ -39,5 +39,9 @@
 
 .user-topbar{
     width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
     margin-left: 1em;
+    object-fit: cover;
+    object-position: center;
 }

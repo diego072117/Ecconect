@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 const { VITE_URL_API_IMG } = import.meta.env;
-import "./Module.scss";
 import { Link } from "react-router-dom";
+import "./Module.scss";
 
 export const PostCard = ({ post }) => {
   const formattedDate = format(
