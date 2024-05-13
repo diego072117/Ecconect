@@ -71,6 +71,24 @@ body,p,ul,h2{
   height: 100vh;
 }
 
+.button {
+  border: none;
+  border-radius: 5px;
+  padding: 16px 20px;
+  color: #fff;
+  font-weight: 600;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.update {
+  background-color: #877eff;
+}
+
+.cancel {
+  background-color: #1f1f22;
+}
+
 @media (max-width: 768px) {
   .layout{
     display: block;

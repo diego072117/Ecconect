@@ -13,6 +13,7 @@ import { People } from "../pages/People/People";
 import { Explore } from "../pages/Explore/Explore";
 import { Saved } from "../pages/Saved/Saved";
 import { PostDetails } from "../pages/PostDetails/PostDetails";
+import { UpdatePost } from "../pages/UpdatePost/UpdatePost";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -41,6 +42,7 @@ export const AppRouter = () => {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
           <Route path="/posts/:id" element={<PostDetails />} />
+          <Route path="/update-post/:id" element={<UpdatePost />} />
           <Route path="/all-users" element={<People />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/saved" element={<Saved />} />

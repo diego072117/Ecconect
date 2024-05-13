@@ -1,18 +1,31 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { usePostActions } from "../../hooks/usePostActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+const { VITE_URL_API_IMG } = import.meta.env;
 import FileUploader from "../../shared/FileUploader";
 
-export const FormPost = () => {
+export const FormPost = ({ action, post }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.users.auth.user);
-  const { createPost } = usePostActions();
+  const { createPost, updatePost } = usePostActions();
   const [formData, setFormData] = useState({
+    id: null,
     descripcion: "",
     publicacion: null,
     id_usuarioCreador: user.id,
   });
+
+  useEffect(() => {
+    if (action === "Update" && post) {
+      setFormData({
+        id: post.id,
+        descripcion: post.descripcion,
+        publicacion: post.publicacion,
+        id_usuarioCreador: user.id,
+      });
+    }
+  }, [action]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,9 +38,21 @@ export const FormPost = () => {
       formDataToSend.append(key, formData[key]);
     }
 
-    const response = await createPost(formDataToSend);
+    // const formDataObject = Object.fromEntries(formDataToSend.entries());
+
+    // console.log(formDataObject);
+
+    const response =
+      action === "Update"
+        ? await updatePost(formDataToSend)
+        : await createPost(formDataToSend);
+
     if (response.meta.requestStatus === "fulfilled") {
-      navigate("/");
+      if (action === "Create") {
+        navigate("/");
+      } else {
+        navigate(-1);
+      }
     }
   };
 
@@ -39,6 +64,7 @@ export const FormPost = () => {
   const handleFileChange = (name, file) => {
     setFormData({ ...formData, [name]: file });
   };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -60,12 +86,19 @@ export const FormPost = () => {
         <FileUploader
           name="publicacion"
           fieldChange={handleFileChange}
-          mediaUrl=""
+          mediaUrl={
+            post && action === "Update"
+              ? `${VITE_URL_API_IMG}/${post.publicacion}`
+              : ""
+          }
         />
       </div>
       <div className="container-create-post">
-        <button className="button-create-post" type="submit">
-          Crear Post
+        <button className="button cancel" type="button" onClick={() => navigate(-1)}>
+          Cancel
+        </button>
+        <button className="button update" type="submit">
+          {action === "Create" ? "Crear Post" : "Update Post"}
         </button>
       </div>
     </form>

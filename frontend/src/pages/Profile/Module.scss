@@ -76,25 +76,8 @@
     display: flex;
     width: 100%;
     max-width: 60em;
-
-    .button {
-      border-radius: 10px 0 0 10px;
-    }
-
-    .button-like {
-      border-radius: 0 10px 10px 0;
-    }
-
-    .active {
-      background-color: #1f1f22;
-    }
-
-    .inactive {
-      background-color: #09090a;
-    }
-
-    .button,
-    .button-like {
+    .button-post-profile,
+    .button-like-profile {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -109,6 +92,21 @@
       img {
         margin-right: 10px;
       }
+    }
+    .button-post-profile {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .button-like-profile {
+      border-radius: 0 10px 10px 0;
+    }
+
+    .active {
+      background-color: #1f1f22;
+    }
+
+    .inactive {
+      background-color: #09090a;
     }
   }
 }

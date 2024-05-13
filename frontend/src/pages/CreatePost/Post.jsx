@@ -14,7 +14,7 @@ export const Post = () => {
           />
           <h2>Create Post</h2>
         </div>
-        <FormPost />
+        <FormPost action="Create"/>
       </div>
     </div>
   );
