@@ -1,6 +1,7 @@
 import { UseUserActions } from "../../hooks/UseUserActions";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const Topbar = () => {
@@ -20,16 +21,16 @@ export const Topbar = () => {
       </Link>
 
       <div className="topbar-session">
-        <button
-          variant="ghost"
-          className="exit-topbar"
-          onClick={LogoutUser}
-        >
+        <button variant="ghost" className="exit-topbar" onClick={LogoutUser}>
           <img src="/assets/icons/logout.svg" alt="logout" />
         </button>
         <Link to={`/profile/${user.id}`}>
           <img
-            src="/assets/icons/profile-placeholder.svg"
+            src={
+              user.avatar
+                ? `${VITE_URL_API_IMG}/${user.avatar}`
+                : "/assets/icons/profile-placeholder.svg"
+            }
             alt="profile"
             className="user-topbar"
           />
