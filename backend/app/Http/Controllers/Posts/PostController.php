@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Posts;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePost;
 use App\Http\Requests\Post\UpdatePost;
+use App\Models\Comment\Comment;
 use App\Models\Posts\Posts;
 use App\Models\Posts\SavePost;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -72,10 +72,6 @@ class PostController extends Controller
 
     public function savePost(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'user_id' => 'required|exists:users,id',
-        //     'post_id' => 'required|exists:posts,id'
-        // ]);
 
         $savedPost = new SavePost($request->all());
         $savedPost->save();
@@ -95,5 +91,32 @@ class PostController extends Controller
         $post->load('usuarioCreador');
 
         return $post;
+    }
+
+    public function saveComment(Request $request)
+    {
+        // $validatedData = $request->validate([
+        //     'id_user' => 'required|exists:usuarios,id',
+        //     'id_post' => 'required|exists:posts,id',
+        //     'coment' => 'required|string|max:255',
+        // ]);
+
+        $comment = new Comment($request->all());
+        $comment->save();
+
+        return response()->json(['message' => 'Comentario creado con éxito'], 201);
+    }
+
+    public function getCommentsByPost($postId)
+    {
+        $post = Posts::findOrFail($postId);
+
+        if (!$post) {
+            return response()->json(['message' => 'El post no fue encontrado'], 404);
+        }
+
+        $comments = Comment::where('id_post', $postId)->orderBy('created_at', 'DESC')->get();
+
+        return response()->json(['comments' => $comments], 200);
     }
 }

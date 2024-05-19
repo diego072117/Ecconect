@@ -63,9 +63,6 @@ export const getPostById = createAsyncThunk("post/getPostById", async (id) => {
 export const updatePostAsync = createAsyncThunk(
   "post/updatePost",
   async (postData) => {
-    const formDataObject = Object.fromEntries(postData.entries());
-
-    console.log(formDataObject);
     try {
       const response = await axios.post(
         `${VITE_URL_API}/Posts/UpdatePost/${postData.get("id")}`,
