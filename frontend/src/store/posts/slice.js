@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   posts: [],
   postsByUser: [],
+  commentsPost: [],
   postById: null,
   status: "idle",
   error: null,
@@ -75,6 +76,35 @@ export const updatePostAsync = createAsyncThunk(
   }
 );
 
+export const getCommetsPost = createAsyncThunk(
+  "post/getCommetsPost",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Posts/PostComment/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+export const saveCommentAsync = createAsyncThunk(
+  "post/saveComment",
+  async (commentData) => {
+    try {
+      const response = await axios.post(
+        `${VITE_URL_API}/Posts/SaveComment/`,
+        commentData
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -131,10 +161,34 @@ const postsSlice = createSlice({
       })
       .addCase(updatePostAsync.fulfilled, (state) => {
         state.status = "succeeded";
+        state.error = action.error.message;
       })
       .addCase(updatePostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(getCommetsPost.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getCommetsPost.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.commentsPost = action.payload;
+      })
+      .addCase(getCommetsPost.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(saveCommentAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(saveCommentAsync.fulfilled, (state) => {
+        state.status = "succeeded";
+        toast.success("Successfully!");
+      })
+      .addCase(saveCommentAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
       });
   },
 });

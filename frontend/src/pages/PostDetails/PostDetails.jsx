@@ -2,22 +2,41 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../../shared/Loader";
 import { usePostActions } from "../../hooks/usePostActions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
+import { CommentsPost } from "../../components/CommentsPost/CommentsPost";
 
 export const PostDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { postsById } = usePostActions();
-  const { postById: post, status } = useSelector((state) => state.posts);
+  const { postsById, commetPost, saveComment } = usePostActions();
+  const {
+    postById: post,
+    commentsPost,
+    status,
+  } = useSelector((state) => state.posts);
   const user = useSelector((state) => state.users.auth.user);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     postsById(id);
+    commetPost(id);
   }, [id]);
 
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (comment.trim()) {
+      await saveComment({
+        id_user: user.id,
+        id_post: post.id,
+        coment: comment,
+      });
+      setComment("");
+      commetPost(id); // Refresh comments
+    }
+  };
 
   if (!post || status === "loading")
     return (
@@ -38,7 +57,7 @@ export const PostDetails = () => {
         className="button-back"
       >
         <img src={"/assets/icons/back.svg"} alt="back" width={24} height={24} />
-        <p className="small-medium lg:base-medium">Back</p>
+        <p>Back</p>
       </button>
 
       <div className="info-details">
@@ -95,6 +114,33 @@ export const PostDetails = () => {
           </div>
         </div>
       </div>
+      <div className="add-comment">
+        <img
+          src={
+            post.usuario_creador.avatar
+              ? `${VITE_URL_API_IMG}/${post.usuario_creador.avatar}`
+              : "/assets/icons/profile-placeholder.svg"
+          }
+          alt="profile"
+        />
+        <form onSubmit={handleCommentSubmit} className="form-comment">
+          <input
+            type="text"
+            value={comment}
+            className="input-comment"
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Add a comment"
+            required
+          />
+          <button type="submit" className="button-comment">
+            <img
+              src="/assets/icons/chat.svg"
+              alt="profile"
+            />
+          </button>
+        </form>
+      </div>
+      <CommentsPost comments={commentsPost} />
     </div>
   );
 };

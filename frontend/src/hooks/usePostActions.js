@@ -2,8 +2,10 @@ import { useDispatch } from "react-redux";
 import {
   createPostAsync,
   getAllPostAsync,
+  getCommetsPost,
   getPostById,
   getPostByUserId,
+  saveCommentAsync,
   updatePostAsync,
 } from "../store/posts/slice";
 
@@ -30,5 +32,21 @@ export const usePostActions = () => {
     return dispatch(updatePostAsync(postData));
   };
 
-  return { createPost, listPosts, listPostsByUser, postsById, updatePost };
+  const commetPost = async (id) => {
+    return dispatch(getCommetsPost(id));
+  };
+
+  const saveComment = async (commentData) => {
+    return dispatch(saveCommentAsync(commentData));
+  };
+
+  return {
+    createPost,
+    listPosts,
+    listPostsByUser,
+    postsById,
+    updatePost,
+    commetPost,
+    saveComment,
+  };
 };

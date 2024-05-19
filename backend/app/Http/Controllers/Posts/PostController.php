@@ -117,6 +117,8 @@ class PostController extends Controller
 
         $comments = Comment::where('id_post', $postId)->orderBy('created_at', 'DESC')->get();
 
-        return response()->json(['comments' => $comments], 200);
+        $comments->load("usuario");
+
+        return  $comments;
     }
 }
