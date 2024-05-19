@@ -2,6 +2,7 @@
 
 namespace App\Models\Usuarios;
 
+use App\Models\Comment\Comment;
 use App\Models\Posts\Posts;
 use App\Models\Posts\SavePost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +27,11 @@ class Usuario extends Authenticatable implements JWTSubject
     ];
 
     // relaciones con otras tablas, puedes definirlas aquí
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_user');
+    }
 
     public function posts()
     {

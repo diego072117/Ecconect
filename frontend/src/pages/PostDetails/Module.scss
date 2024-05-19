@@ -16,7 +16,7 @@
     font-weight: 600;
     color: #fff;
     background-color: transparent;
-    margin-bottom: 3em;
+    margin-bottom: 2em;
     width: 7em;
     cursor: pointer;
     img {
@@ -116,6 +116,52 @@
 
 .info-post {
   color: #fff;
+}
+
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  img {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    margin: 0 1em 0 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .form-comment {
+    display: flex;
+    width: 100%;
+    .input-comment {
+      flex-grow: 1;
+      color: #fff;
+      background-color: #09090a;
+      border: 1px solid rgba(31, 31, 34, 1);
+      outline: none;
+      padding: 1em;
+      border-radius: 8px 0 0 8px;
+      font-size: 1em;
+    }
+    .button-comment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #877eff;
+      width: 5em;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+
+      img {
+        width: 2em;
+        height: 2em;
+        margin: 0;
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
 }
 
 @media (min-width: 1090px) {

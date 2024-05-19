@@ -2,6 +2,7 @@
 
 namespace App\Models\Posts;
 
+use App\Models\Comment\Comment;
 use App\Models\Usuarios\Usuario;
 use App\Models\Posts\SavePost;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,11 @@ class Posts extends Model
     public function usuarioCreador()
     {
         return $this->belongsTo(Usuario::class, 'id_usuarioCreador');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_post');
     }
 
     public function savedByUsers()
