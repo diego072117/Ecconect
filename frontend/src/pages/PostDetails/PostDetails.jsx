@@ -117,8 +117,8 @@ export const PostDetails = () => {
       <div className="add-comment">
         <img
           src={
-            post.usuario_creador.avatar
-              ? `${VITE_URL_API_IMG}/${post.usuario_creador.avatar}`
+            user.avatar
+              ? `${VITE_URL_API_IMG}/${user.avatar}`
               : "/assets/icons/profile-placeholder.svg"
           }
           alt="profile"
@@ -133,10 +133,7 @@ export const PostDetails = () => {
             required
           />
           <button type="submit" className="button-comment">
-            <img
-              src="/assets/icons/chat.svg"
-              alt="profile"
-            />
+            <img src="/assets/icons/chat.svg" alt="profile" />
           </button>
         </form>
       </div>
