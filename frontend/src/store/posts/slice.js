@@ -161,7 +161,7 @@ const postsSlice = createSlice({
       })
       .addCase(updatePostAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        state.error = action.error.message;
+        toast.success("Successfully updated post!");
       })
       .addCase(updatePostAsync.rejected, (state, action) => {
         state.status = "failed";
