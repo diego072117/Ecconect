@@ -48,7 +48,7 @@ export const PostDetails = () => {
   const formattedDate = post.created_at
     ? format(new Date(post.created_at), "d MMM, yyyy")
     : "";
-
+  console.log(commentsPost);
   return (
     <div className="post-details-container">
       <button
@@ -137,7 +137,8 @@ export const PostDetails = () => {
           </button>
         </form>
       </div>
-      <CommentsPost comments={commentsPost} />
+      {commentsPost.length != 0 ? <CommentsPost comments={commentsPost} /> : ""}
+      
     </div>
   );
 };
