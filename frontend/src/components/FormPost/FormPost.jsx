@@ -50,7 +50,8 @@ export const FormPost = ({ action, post }) => {
     if (response.meta.requestStatus === "fulfilled") {
       if (action === "Create") {
         navigate("/");
-      } else {
+      }
+       if(action=== "Update"){
         navigate(-1);
       }
     }
