@@ -4,14 +4,15 @@ import { Loader } from "../../shared/Loader";
 import { usePostActions } from "../../hooks/usePostActions";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import { CommentsPost } from "../../components/CommentsPost/CommentsPost";
+import { FaCheckCircle } from "react-icons/fa";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
-import { CommentsPost } from "../../components/CommentsPost/CommentsPost";
 
 export const PostDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { postsById, commetPost, saveComment } = usePostActions();
+  const { postsById, commetPost, saveComment, finishPost } = usePostActions();
   const {
     postById: post,
     commentsPost,
@@ -38,6 +39,11 @@ export const PostDetails = () => {
     }
   };
 
+  const handleFinishPost = async () => {
+    //console.log(id);
+    finishPost(id);
+  };
+
   if (!post || status === "loading")
     return (
       <div className="loader">
@@ -48,7 +54,7 @@ export const PostDetails = () => {
   const formattedDate = post.created_at
     ? format(new Date(post.created_at), "d MMM, yyyy")
     : "";
-    
+
   return (
     <div className="post-details-container">
       <button
@@ -87,6 +93,19 @@ export const PostDetails = () => {
             </Link>
             {user.id === post.usuario_creador.id ? (
               <div className="actions-post">
+                <button
+                  onClick={() => {
+                    if (post.state === "activo") {
+                      handleFinishPost();
+                    }
+                  }}
+                  className="icon finish"
+                  style={{
+                    color: post.state === "activo" ? "#877eff" : "#55cc5b",
+                  }}
+                >
+                  <FaCheckCircle />
+                </button>
                 <Link to={`/update-post/${post.id}`} className="icon">
                   <img
                     src={"/assets/icons/edit.svg"}
@@ -114,31 +133,32 @@ export const PostDetails = () => {
           </div>
         </div>
       </div>
-      <div className="add-comment">
-        <img
-          src={
-            user.avatar
-              ? `${VITE_URL_API_IMG}/${user.avatar}`
-              : "/assets/icons/profile-placeholder.svg"
-          }
-          alt="profile"
-        />
-        <form onSubmit={handleCommentSubmit} className="form-comment">
-          <input
-            type="text"
-            value={comment}
-            className="input-comment"
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Add a comment"
-            required
+      {post.state === "active" && (
+        <div className="add-comment">
+          <img
+            src={
+              user.avatar
+                ? `${VITE_URL_API_IMG}/${user.avatar}`
+                : "/assets/icons/profile-placeholder.svg"
+            }
+            alt="profile"
           />
-          <button type="submit" className="button-comment">
-            <img src="/assets/icons/chat.svg" alt="profile" />
-          </button>
-        </form>
-      </div>
+          <form onSubmit={handleCommentSubmit} className="form-comment">
+            <input
+              type="text"
+              value={comment}
+              className="input-comment"
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Add a comment"
+              required
+            />
+            <button type="submit" className="button-comment">
+              <img src="/assets/icons/chat.svg" alt="profile" />
+            </button>
+          </form>
+        </div>
+      )}
       {commentsPost.length != 0 ? <CommentsPost comments={commentsPost} /> : ""}
-      
     </div>
   );
 };

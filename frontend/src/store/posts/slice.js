@@ -105,6 +105,20 @@ export const saveCommentAsync = createAsyncThunk(
   }
 );
 
+export const finishPostAsync = createAsyncThunk(
+  "post/finishPost",
+  async (id) => {
+    try {
+      const response = await axios.put(
+        `${VITE_URL_API}/Posts/FinishPost/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -189,7 +203,19 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");
+      })
+      .addCase(finishPostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(finishPostAsync.fulfilled, (state) => {
+        state.status = "succeeded";
+        toast.success("Successfully finish post!");
+      })
+      .addCase(finishPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
+      
   },
 });
 
