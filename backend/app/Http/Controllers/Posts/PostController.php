@@ -130,4 +130,23 @@ class PostController extends Controller
 
         return response()->json(['message' => 'El post ha sido finalizado con éxito'], 200);
     }
+
+    public function searchPosts(Request $request)
+    {
+        $searchTerm = $request->input('property');
+
+        if (empty($searchTerm)) {
+            return response()->json(['error' => 'Debe proporcionar un término de búsqueda.'], 400);
+        }
+
+        $posts = Posts::where('descripcion', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        // Si no se encuentran resultados
+        if ($posts->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron posts con esa descripción.'], 404);
+        }
+
+        return response()->json(['posts' => $posts], 200);
+    }
+
 }
