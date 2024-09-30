@@ -124,7 +124,6 @@ export const getSearchPostAsync = createAsyncThunk(
   "post/getSearchPostAsync",
   async (searchProperty) => {
     try {
-      console.log(searchProperty);
       const response = await axios.get(`${VITE_URL_API}/Posts/SearchPosts`, {
         params: searchProperty,
       });
@@ -237,8 +236,6 @@ const postsSlice = createSlice({
       .addCase(getSearchPostAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.searchPost = action.payload;
-        console.log(state.searchPost);
-        
       })
       .addCase(getSearchPostAsync.rejected, (state, action) => {
         state.status = "failed";
