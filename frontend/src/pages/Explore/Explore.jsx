@@ -25,7 +25,7 @@ export const Explore = () => {
             value={search}
             className="input-search"
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Add a comment"
+            placeholder="Search"
             required
           />
           <button onClick={handleSearchPosts} className="search-button">

@@ -35,12 +35,13 @@
   padding: 1em;
   border-radius: 8px;
   font-size: 1em;
-  //   padding-right: 3em; /* Espacio para el botón de búsqueda */
+  //padding-left: 4em;
 }
 
 .search-button {
   position: absolute; /* Posiciona el botón de búsqueda sobre el input */
   right: 1em;
+  //left: 1em;
   top: 50%;
   transform: translateY(-50%);
   background: none;
