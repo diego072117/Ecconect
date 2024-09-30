@@ -54,7 +54,7 @@ class PostController extends Controller
     public function getAllPosts()
     {
         // Obtener todos los posts ordenados del más reciente al más viejo
-        $posts = Posts::orderBy('created_at', 'DESC')->get();
+        $posts = Posts::where('state', 'activo')->orderBy('created_at', 'DESC')->get();
 
         // Cargar la relación con el usuario creador para cada post
         $posts->load('usuarioCreador');
@@ -95,11 +95,6 @@ class PostController extends Controller
 
     public function saveComment(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'id_user' => 'required|exists:usuarios,id',
-        //     'id_post' => 'required|exists:posts,id',
-        //     'coment' => 'required|string|max:255',
-        // ]);
 
         $comment = new Comment($request->all());
         $comment->save();
@@ -120,5 +115,40 @@ class PostController extends Controller
         $comments->load("usuario");
 
         return  $comments;
+    }
+
+    public function finishPost($postId)
+    {
+        $post = Posts::findOrFail($postId);
+
+        if (!$post) {
+            return response()->json(['message' => 'El post no fue encontrado'], 404);
+        }
+
+        $post->state = 'finalizado';
+        $post->save();
+
+        return response()->json(['message' => 'El post ha sido finalizado con éxito'], 200);
+    }
+
+    public function searchPosts(Request $request)
+    {
+        $searchTerm = $request->input('property');
+
+
+        if (empty($searchTerm)) {
+            return response()->json(['error' => 'Debe proporcionar un término de búsqueda.'], 400);
+        }
+
+        $posts = Posts::where('descripcion', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        $posts->load('usuarioCreador');
+
+        // Si no se encuentran resultados
+        if ($posts->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron posts con esa descripción.'], 404);
+        }
+
+        return response()->json(['postsSearchByUser' => $posts], 200);
     }
 }

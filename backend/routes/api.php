@@ -33,4 +33,6 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::get('/PostByUser/{id}', 'getPostByUser');
     Route::post('/SaveComment', 'saveComment');
     Route::get('/PostComment/{id}', 'getCommentsByPost');
+    Route::put('/FinishPost/{id}', 'finishPost');
+    Route::get('/SearchPosts', 'searchPosts');
 });

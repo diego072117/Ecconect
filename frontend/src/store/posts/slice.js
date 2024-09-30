@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
+  searchPost: [],
   postsByUser: [],
   commentsPost: [],
   postById: null,
@@ -105,6 +106,34 @@ export const saveCommentAsync = createAsyncThunk(
   }
 );
 
+export const finishPostAsync = createAsyncThunk(
+  "post/finishPost",
+  async (id) => {
+    try {
+      const response = await axios.put(
+        `${VITE_URL_API}/Posts/FinishPost/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+export const getSearchPostAsync = createAsyncThunk(
+  "post/getSearchPostAsync",
+  async (searchProperty) => {
+    try {
+      const response = await axios.get(`${VITE_URL_API}/Posts/SearchPosts`, {
+        params: searchProperty,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -161,7 +190,7 @@ const postsSlice = createSlice({
       })
       .addCase(updatePostAsync.fulfilled, (state) => {
         state.status = "succeeded";
-        state.error = action.error.message;
+        toast.success("Successfully updated post!");
       })
       .addCase(updatePostAsync.rejected, (state, action) => {
         state.status = "failed";
@@ -189,6 +218,28 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");
+      })
+      .addCase(finishPostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(finishPostAsync.fulfilled, (state) => {
+        state.status = "succeeded";
+        toast.success("Successfully finish post!");
+      })
+      .addCase(finishPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(getSearchPostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getSearchPostAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.searchPost = action.payload;
+      })
+      .addCase(getSearchPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
