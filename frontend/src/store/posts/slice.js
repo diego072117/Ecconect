@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
+  searchPost: [],
   postsByUser: [],
   commentsPost: [],
   postById: null,
@@ -119,6 +120,21 @@ export const finishPostAsync = createAsyncThunk(
   }
 );
 
+export const getSearchPostAsync = createAsyncThunk(
+  "post/getSearchPostAsync",
+  async (searchProperty) => {
+    try {
+      console.log(searchProperty);
+      const response = await axios.get(`${VITE_URL_API}/Posts/SearchPosts`, {
+        params: searchProperty,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -214,8 +230,20 @@ const postsSlice = createSlice({
       .addCase(finishPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(getSearchPostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getSearchPostAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.searchPost = action.payload;
+        console.log(state.searchPost);
+        
+      })
+      .addCase(getSearchPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
-      
   },
 });
 

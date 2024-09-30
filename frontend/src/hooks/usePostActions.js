@@ -6,10 +6,11 @@ import {
   getCommetsPost,
   getPostById,
   getPostByUserId,
+  getSearchPostAsync,
   saveCommentAsync,
   updatePostAsync,
 } from "../store/posts/slice";
-import Swal from "sweetalert2"; // Importamos SweetAlert2
+import Swal from "sweetalert2";
 
 export const usePostActions = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,10 @@ export const usePostActions = () => {
     }
   };
 
+  const searchPosts = (searchProperty) => {
+    dispatch(getSearchPostAsync(searchProperty));
+  };
+
   return {
     createPost,
     listPosts,
@@ -68,5 +73,6 @@ export const usePostActions = () => {
     commetPost,
     saveComment,
     finishPost,
+    searchPosts,
   };
 };
