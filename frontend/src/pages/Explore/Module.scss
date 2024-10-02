@@ -1,6 +1,9 @@
 .container-explore {
   font-family: "Inter";
+  display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 3em;
 
   @media (max-width: 768px) {
@@ -69,7 +72,6 @@
   flex-wrap: wrap;
   width: 100%;
   max-width: 80em;
-  margin-top: 3em;
 
   .post-user-search {
     display: flex;
