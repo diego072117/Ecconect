@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import "./Module.scss";
+import { IoFilterSharp } from "react-icons/io5";
 import { usePostActions } from "../../hooks/usePostActions";
 import { useSelector } from "react-redux";
+import { Loader } from "../../shared/Loader";
+import { Link } from "react-router-dom";
+const { VITE_URL_API_IMG } = import.meta.env;
+import "./Module.scss";
 
 export const Explore = () => {
   const [search, setSearch] = useState("");
+  const [showSearchResults, setShowSearchResults] = useState(true);
+  const { posts } = useSelector((state) => state.posts.posts);
   const { postsSearchByUser } = useSelector((state) => state.posts.searchPost);
-  const { searchPosts } = usePostActions();
+  const user = useSelector((state) => state.users.auth.user);
+  const { searchPosts, listPosts } = usePostActions();
 
-  const handleSearchPosts = () => {
+  useEffect(() => {
+    listPosts();
+  }, []);
+
+  const handleSearchPosts = useCallback(() => {
     searchPosts({ property: search });
-  };
+    setShowSearchResults(true);
+  }, [search, searchPosts]);
+
+  const handleReset = useCallback(() => {
+    setShowSearchResults(false); // Para volver a mostrar todos los posts
+  }, []);
+
+  let content =
+    showSearchResults && postsSearchByUser ? postsSearchByUser : posts;
 
   return (
     <div className="container-explore">
@@ -25,13 +44,46 @@ export const Explore = () => {
             value={search}
             className="input-search"
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Add a comment"
+            placeholder="Search"
             required
           />
-          <button onClick={handleSearchPosts} className="search-button">
+          <button onClick={handleSearchPosts} className="filter-search search-button">
             <CiSearch />
           </button>
+          <button onClick={handleReset} className="all-search search-button">
+            <IoFilterSharp />
+          </button>
         </div>
+      </div>
+      <div className="post-search">
+        {content ? (
+          <div className="post-search-container">
+            {content.map((post) => (
+              <Link
+                key={post.id}
+                className="post-user-search"
+                to={`/posts/${post.id}`}
+                style={{
+                  backgroundImage: `url(${VITE_URL_API_IMG}/${post.publicacion})`,
+                }}
+              >
+                <div className="info-user-post">
+                  <img
+                    src={
+                      user.avatar
+                        ? `${VITE_URL_API_IMG}/${user.avatar}`
+                        : "/assets/icons/profile-placeholder.svg"
+                    }
+                    alt="profile"
+                  />
+                  <p className="username-post-search">{user.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

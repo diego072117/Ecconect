@@ -9,7 +9,7 @@ export const CommentsPost = ({ comments }) => {
       {comments.length > 0 ? (
         comments.map((comment) => (
           <div key={comment.id} className="comment">
-            <Link className="comment-user">
+            <Link className="comment-user" to={`/profile/${comment.usuario.id}`}>
               <img
                 src={
                   comment.usuario.avatar

@@ -240,6 +240,7 @@ const postsSlice = createSlice({
       .addCase(getSearchPostAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        toast.error("No se enconstrar publicaciones relacionadas.");
       });
   },
 });

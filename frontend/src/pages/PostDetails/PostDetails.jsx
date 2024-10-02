@@ -133,7 +133,7 @@ export const PostDetails = () => {
           </div>
         </div>
       </div>
-      {post.state === "active" && (
+      {post.state === "activo" && (
         <div className="add-comment">
           <img
             src={
