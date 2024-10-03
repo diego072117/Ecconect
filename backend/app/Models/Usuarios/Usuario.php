@@ -3,6 +3,7 @@
 namespace App\Models\Usuarios;
 
 use App\Models\Comment\Comment;
+use App\Models\Followers\Follower;
 use App\Models\Posts\Posts;
 use App\Models\Posts\SavePost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +42,17 @@ class Usuario extends Authenticatable implements JWTSubject
     public function savedPosts()
     {
         return $this->hasMany(SavePost::class, 'user_id');
+    }
+
+
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'followed_id');
+    }
+
+    public function followings()
+    {
+        return $this->hasMany(Follower::class, 'follower_id');
     }
 
     public function getJWTIdentifier()
