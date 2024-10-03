@@ -36,4 +36,14 @@ class FollowerController extends Controller
             ], 201);
         }
     }
+
+    public function getFollowings($follower_id)
+    {
+        $followings = Follower::where('follower_id', $follower_id)
+            ->with('followed') // Asume que la relación 'followed' está definida en el modelo Follower
+            ->get()
+            ->pluck('followed'); // Obtener solo los usuarios seguidos
+
+        return response()->json($followings, 200);
+    }
 }

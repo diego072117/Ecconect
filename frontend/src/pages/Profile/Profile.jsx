@@ -3,22 +3,32 @@ import { Link, useParams } from "react-router-dom";
 import { PostByUser } from "../../components/PostByUser/PostByUser";
 import { useEffect, useState } from "react";
 import { LikedPostByUser } from "../../components/LikedPostByUser/LikedPostByUser";
-const { VITE_URL_API_IMG } = import.meta.env;
 import { UseUserActions } from "../../hooks/UseUserActions";
 import { Loader } from "../../shared/Loader";
+import { useFollowersActions } from "../../hooks/useFollowersActions";
+import { RiUserFollowFill } from "react-icons/ri";
+import { RiUserUnfollowFill } from "react-icons/ri";
+const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const Profile = () => {
   const { id } = useParams();
   const { userbyId } = UseUserActions();
+  const { followUser, getFollowings } = useFollowersActions();
   const userAuth = useSelector((state) => state.users.auth.user);
   const { userById: user, status } = useSelector((state) => state.users);
   const { postsByUser } = useSelector((state) => state.posts);
+  const { followings, status: statusFollow } = useSelector(
+    (state) => state.followers
+  );
   const [split, setSplit] = useState(true);
 
   useEffect(() => {
     userbyId(id);
-  }, [id]);
+    if (userAuth) {
+      getFollowings(userAuth.id);
+    }
+  }, [id, userAuth]);
 
   const handlePostProfile = () => {
     setSplit(true);
@@ -28,6 +38,19 @@ export const Profile = () => {
     setSplit(false);
   };
 
+  const handleFolliwing = async () => {
+    await followUser({
+      follower_id: userAuth.id,
+      followed_id: id,
+    });
+    getFollowings(userAuth.id);
+  };
+
+  const isFollowing = () => {
+    return followings.some((follow) => follow.id == id);
+  };
+
+  //console.log(followings);
 
   if (!user || status === "loading")
     return (
@@ -61,7 +84,7 @@ export const Profile = () => {
                   <span>20</span> Followers
                 </p>
                 <p className="following">
-                  <span>20</span> Following
+                  <span>{followings?.length}</span> Following
                 </p>
               </div>
             </div>
@@ -70,7 +93,7 @@ export const Profile = () => {
             {userAuth.id == user.id ? (
               <Link
                 to={`/update-profile/${userAuth.id}`}
-                className={`edit-button`}
+                className={`edit-follow-button`}
               >
                 <img
                   src={"/assets/icons/edit.svg"}
@@ -81,9 +104,20 @@ export const Profile = () => {
                 <p>Edit Profile</p>
               </Link>
             ) : (
-              <Link className={`edit-button`}>
-                <p>Follow</p>
-              </Link>
+              <button
+                onClick={handleFolliwing}
+                className={`edit-follow-button ${
+                  statusFollow === "loading" ? "disabled" : "Active"
+                }`}
+                disabled={statusFollow === "loading"}
+              >
+                {isFollowing() ? (
+                  <RiUserUnfollowFill className="unfollow-icon" />
+                ) : (
+                  <RiUserFollowFill className="follow-icon" />
+                )}
+                <p>{isFollowing() ? "UnFollow" : "Follow"}</p>
+              </button>
             )}
           </div>
         </div>
