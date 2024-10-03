@@ -13,7 +13,6 @@ export const Explore = () => {
   const [showSearchResults, setShowSearchResults] = useState(true);
   const { posts } = useSelector((state) => state.posts.posts);
   const { postsSearchByUser } = useSelector((state) => state.posts.searchPost);
-  const user = useSelector((state) => state.users.auth.user);
   const { searchPosts, listPosts } = usePostActions();
 
   useEffect(() => {
@@ -70,13 +69,13 @@ export const Explore = () => {
                 <div className="info-user-post">
                   <img
                     src={
-                      user.avatar
-                        ? `${VITE_URL_API_IMG}/${user.avatar}`
+                      post.usuario_creador.avatar
+                        ? `${VITE_URL_API_IMG}/${post.usuario_creador.avatar}`
                         : "/assets/icons/profile-placeholder.svg"
                     }
                     alt="profile"
                   />
-                  <p className="username-post-search">{user.name}</p>
+                  <p className="username-post-search">{post.usuario_creador.name}</p>
                 </div>
               </Link>
             ))}

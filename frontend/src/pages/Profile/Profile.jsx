@@ -14,21 +14,22 @@ import "./Module.scss";
 export const Profile = () => {
   const { id } = useParams();
   const { userbyId } = UseUserActions();
-  const { followUser, getFollowings } = useFollowersActions();
+  const { followUser, getFollowingsUserProfile, getFollowingsUserAuth } =
+    useFollowersActions();
   const userAuth = useSelector((state) => state.users.auth.user);
   const { userById: user, status } = useSelector((state) => state.users);
   const { postsByUser } = useSelector((state) => state.posts);
-  const { followings, status: statusFollow } = useSelector(
-    (state) => state.followers
-  );
+  const {
+    followingsUserProfile,
+    followingsUserAuth,
+    status: statusFollow,
+  } = useSelector((state) => state.followers);
   const [split, setSplit] = useState(true);
 
   useEffect(() => {
     userbyId(id);
-    if (userAuth) {
-      getFollowings(userAuth.id);
-    }
-  }, [id, userAuth]);
+    getFollowingsUserProfile(id);
+  }, [id]);
 
   const handlePostProfile = () => {
     setSplit(true);
@@ -43,14 +44,12 @@ export const Profile = () => {
       follower_id: userAuth.id,
       followed_id: id,
     });
-    getFollowings(userAuth.id);
+    getFollowingsUserAuth(userAuth.id);
   };
 
   const isFollowing = () => {
-    return followings.some((follow) => follow.id == id);
+    return followingsUserAuth.some((follow) => follow.id == id);
   };
-
-  //console.log(followings);
 
   if (!user || status === "loading")
     return (
@@ -84,7 +83,7 @@ export const Profile = () => {
                   <span>20</span> Followers
                 </p>
                 <p className="following">
-                  <span>{followings?.length}</span> Following
+                  <span>{followingsUserProfile?.length}</span> Following
                 </p>
               </div>
             </div>

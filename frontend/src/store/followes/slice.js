@@ -3,7 +3,8 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const initialState = {
-  followings: [],
+  followingsUserProfile: [],
+  followingsUserAuth: [],
   status: "idle",
   error: null,
   mensaje: null,
@@ -26,12 +27,26 @@ export const followesAsync = createAsyncThunk(
   }
 );
 
-export const getFollowingsAsync = createAsyncThunk(
-  "followes/getFollowings",
-  async (follower_id) => {
+export const getFollowingsUserProfileAsync = createAsyncThunk(
+  "followes/getFollowingsUserProfile",
+  async (user_id) => {
     try {
       const response = await axios.get(
-        `${VITE_URL_API}/Follower/Followings/${follower_id}`
+        `${VITE_URL_API}/Follower/Followings/${user_id}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+export const getFollowingsUserAuthAsync = createAsyncThunk(
+  "followes/getFollowingsUserAuth",
+  async (user_id) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Follower/Followings/${user_id}`
       );
       return response.data;
     } catch (error) {
@@ -55,19 +70,29 @@ const followersSlice = createSlice({
       .addCase(followesAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        toast.error("This didn't work.");
+        toast.error("This didn't work.opopop");
       })
-      .addCase(getFollowingsAsync.pending, (state) => {
+      .addCase(getFollowingsUserProfileAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getFollowingsAsync.fulfilled, (state, action) => {
+      .addCase(getFollowingsUserProfileAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.followings = action.payload;
+        state.followingsUserProfile = action.payload;
       })
-      .addCase(getFollowingsAsync.rejected, (state, action) => {
+      .addCase(getFollowingsUserProfileAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        toast.error("This didn't work.");
+      })
+      .addCase(getFollowingsUserAuthAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getFollowingsUserAuthAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.followingsUserAuth = action.payload;
+      })
+      .addCase(getFollowingsUserAuthAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });

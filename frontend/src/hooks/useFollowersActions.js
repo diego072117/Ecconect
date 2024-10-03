@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { followesAsync, getFollowingsAsync } from "../store/followes/slice";
+import {
+  followesAsync,
+  getFollowingsUserAuthAsync,
+  getFollowingsUserProfileAsync,
+} from "../store/followes/slice";
 
 export const useFollowersActions = () => {
   const dispatch = useDispatch();
@@ -8,12 +12,17 @@ export const useFollowersActions = () => {
     return dispatch(followesAsync(followerData));
   };
 
-  const getFollowings = (follower_id) => {
-    dispatch(getFollowingsAsync(follower_id));
+  const getFollowingsUserProfile = (user_id) => {
+    dispatch(getFollowingsUserProfileAsync(user_id));
+  };
+
+  const getFollowingsUserAuth = (user_id) => {
+    dispatch(getFollowingsUserAuthAsync(user_id));
   };
 
   return {
     followUser,
-    getFollowings,
+    getFollowingsUserProfile,
+    getFollowingsUserAuth,
   };
 };
