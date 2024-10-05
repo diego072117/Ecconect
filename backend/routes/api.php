@@ -40,5 +40,6 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
 Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class], function () {
     Route::post('/SaveFollower', 'toggleFollow');
     Route::get('/Followings/{follower_id}', 'getFollowings');
+    Route::get('/CheckFollowing/{follower_id}/{followed_id}', 'checkIfFollowing');
 });
 

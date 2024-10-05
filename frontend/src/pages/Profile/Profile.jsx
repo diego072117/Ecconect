@@ -14,18 +14,19 @@ import "./Module.scss";
 export const Profile = () => {
   const { id } = useParams();
   const { userbyId } = UseUserActions();
-  const { followUser, getFollowings } = useFollowersActions();
+  const { followUser, checkIfFollowing } = useFollowersActions();
   const userAuth = useSelector((state) => state.users.auth.user);
   const { userById: user, status } = useSelector((state) => state.users);
   const { postsByUser } = useSelector((state) => state.posts);
-  const { followings, status: statusFollow } = useSelector(
+  const { status: statusFollow, isFollowing } = useSelector(
     (state) => state.followers
   );
   const [split, setSplit] = useState(true);
 
   useEffect(() => {
     userbyId(id);
-    getFollowings(userAuth.id);
+    checkIfFollowing({ follower_id: userAuth.id, followed_id: id });
+    // getFollowings(userAuth.id);
   }, [id]);
 
   const handlePostProfile = () => {
@@ -41,12 +42,13 @@ export const Profile = () => {
       follower_id: userAuth.id,
       followed_id: id,
     });
-    getFollowings(userAuth.id);
+    checkIfFollowing({ follower_id: userAuth.id, followed_id: id });
+    // getFollowings(userAuth.id);
   };
 
-  const isFollowing = () => {
-    return followings.some((follow) => follow.id == id);
-  };
+  // const isFollowing = () => {
+  //   return followings.some((follow) => follow.id == id);
+  // };
 
   if (!user || status === "loading")
     return (
@@ -107,12 +109,18 @@ export const Profile = () => {
                 }`}
                 disabled={statusFollow === "loading"}
               >
-                {isFollowing() ? (
-                  <RiUserUnfollowFill className="unfollow-icon" />
+                {statusFollow === "loading" ? (
+                  <Loader /> // Mostrar Loader cuando está cargando
                 ) : (
-                  <RiUserFollowFill className="follow-icon" />
+                  <>
+                    {isFollowing ? (
+                      <RiUserUnfollowFill className="unfollow-icon" />
+                    ) : (
+                      <RiUserFollowFill className="follow-icon" />
+                    )}
+                    <p>{isFollowing ? "UnFollow" : "Follow"}</p>
+                  </>
                 )}
-                <p>{isFollowing() ? "UnFollow" : "Follow"}</p>
               </button>
             )}
           </div>

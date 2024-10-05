@@ -46,4 +46,16 @@ class FollowerController extends Controller
 
         return response()->json($followings, 200);
     }
+
+    public function checkIfFollowing($follower_id, $followed_id)
+    {
+        // Buscar si existe la relación
+        $existingFollow = Follower::where('follower_id', $follower_id)
+            ->where('followed_id', $followed_id)
+            ->exists(); // 'exists()' devuelve true o false
+
+        return response()->json([
+            'is_following' => $existingFollow
+        ], 200);
+    }
 }
