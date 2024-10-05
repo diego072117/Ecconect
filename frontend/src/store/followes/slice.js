@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   followings: [],
+  isFollowing: null,
   status: "idle",
   error: null,
   mensaje: null,
@@ -40,6 +41,19 @@ export const getFollowingsAsync = createAsyncThunk(
   }
 );
 
+export const checkIfFollowingAsync = createAsyncThunk(
+  "followes/checkIfFollowingAsync",
+  async ({ follower_id, followed_id }) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Follower/CheckFollowing/${follower_id}/${followed_id}`
+      );
+      return response.data.is_following;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
 
 const followersSlice = createSlice({
   name: "followes",
@@ -66,6 +80,17 @@ const followersSlice = createSlice({
         state.followings = action.payload;
       })
       .addCase(getFollowingsAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(checkIfFollowingAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(checkIfFollowingAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.isFollowing = action.payload;
+      })
+      .addCase(checkIfFollowingAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
