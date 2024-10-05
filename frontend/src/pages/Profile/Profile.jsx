@@ -77,10 +77,10 @@ export const Profile = () => {
                   <span>{postsByUser.posts?.length}</span> Posts
                 </p>
                 <p className="followers">
-                  <span>20</span> Followers
+                  <span>{user.followers.length}</span> Followers
                 </p>
                 <p className="following">
-                  <span>uwu</span> Following
+                  <span>{user.followings.length}</span> Following
                 </p>
               </div>
             </div>

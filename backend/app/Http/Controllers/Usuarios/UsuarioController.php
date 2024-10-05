@@ -26,12 +26,13 @@ class UsuarioController extends Controller
 
     public function getUserById($id)
     {
-        $user = Usuario::find($id);
-
+        // Busca el usuario junto con las relaciones followings y followers de una vez
+        $user = Usuario::with(['followings', 'followers'])->find($id);
+    
         if (!$user) {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-
+    
         return response()->json($user);
     }
 
