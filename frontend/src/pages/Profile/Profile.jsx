@@ -14,21 +14,18 @@ import "./Module.scss";
 export const Profile = () => {
   const { id } = useParams();
   const { userbyId } = UseUserActions();
-  const { followUser, getFollowingsUserProfile, getFollowingsUserAuth } =
-    useFollowersActions();
+  const { followUser, getFollowings } = useFollowersActions();
   const userAuth = useSelector((state) => state.users.auth.user);
   const { userById: user, status } = useSelector((state) => state.users);
   const { postsByUser } = useSelector((state) => state.posts);
-  const {
-    followingsUserProfile,
-    followingsUserAuth,
-    status: statusFollow,
-  } = useSelector((state) => state.followers);
+  const { followings, status: statusFollow } = useSelector(
+    (state) => state.followers
+  );
   const [split, setSplit] = useState(true);
 
   useEffect(() => {
     userbyId(id);
-    getFollowingsUserProfile(id);
+    getFollowings(userAuth.id);
   }, [id]);
 
   const handlePostProfile = () => {
@@ -44,11 +41,11 @@ export const Profile = () => {
       follower_id: userAuth.id,
       followed_id: id,
     });
-    getFollowingsUserAuth(userAuth.id);
+    getFollowings(userAuth.id);
   };
 
   const isFollowing = () => {
-    return followingsUserAuth.some((follow) => follow.id == id);
+    return followings.some((follow) => follow.id == id);
   };
 
   if (!user || status === "loading")
@@ -83,7 +80,7 @@ export const Profile = () => {
                   <span>20</span> Followers
                 </p>
                 <p className="following">
-                  <span>{followingsUserProfile?.length}</span> Following
+                  <span>uwu</span> Following
                 </p>
               </div>
             </div>
