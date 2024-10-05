@@ -143,7 +143,7 @@ export const usersSlice = createSlice({
       .addCase(getUserByIdAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        toast.error("This didn't work.");
+        // toast.error("This didn't work");
       })
       .addCase(getAllUsersAsync.pending, (state) => {
         state.status = "loading";
@@ -155,7 +155,7 @@ export const usersSlice = createSlice({
       .addCase(getAllUsersAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        toast.error("This didn't work.");
+        // toast.error("This didn't work.");
       })
       .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";

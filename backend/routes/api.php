@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Followers\FollowerController;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Usuarios\UsuarioController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +36,9 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::put('/FinishPost/{id}', 'finishPost');
     Route::get('/SearchPosts', 'searchPosts');
 });
+
+Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class], function () {
+    Route::post('/SaveFollower', 'toggleFollow');
+    Route::get('/Followings/{follower_id}', 'getFollowings');
+});
+
