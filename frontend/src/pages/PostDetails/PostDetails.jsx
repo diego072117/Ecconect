@@ -40,8 +40,8 @@ export const PostDetails = () => {
   };
 
   const handleFinishPost = async () => {
-    //console.log(id);
-    finishPost(id);
+    await finishPost(id); 
+    await postsById(id);
   };
 
   if (!post || status === "loading")
