@@ -27,8 +27,8 @@ export const usePostActions = () => {
     dispatch(getPostByUserId(id));
   };
 
-  const postsById = (id) => {
-    dispatch(getPostById(id));
+  const postsById = async (id) => {
+    return dispatch(getPostById(id));
   };
 
   const updatePost = async (postData) => {
@@ -56,7 +56,7 @@ export const usePostActions = () => {
     });
 
     if (result.isConfirmed) {
-      dispatch(finishPostAsync(id));
+      return dispatch(finishPostAsync(id));
     }
   };
 
