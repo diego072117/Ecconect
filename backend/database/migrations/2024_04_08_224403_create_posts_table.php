@@ -16,13 +16,11 @@ return new class extends Migration
             $table->text('descripcion')->nullable();
             $table->string('publicacion');
             $table->unsignedBigInteger('id_usuarioCreador');
-            $table->unsignedBigInteger('id_usuarioAdquirido')->nullable();
             $table->string('state')->default('activo');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_usuarioCreador')->references('id')->on('usuarios');
-            $table->foreign('id_usuarioAdquirido')->references('id')->on('usuarios'); 
         });
     }
 

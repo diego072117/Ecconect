@@ -40,11 +40,6 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->hasMany(Posts::class, 'id_usuarioCreador');
     }
 
-    public function receivedPosts()
-    {
-        return $this->hasMany(Posts::class, 'id_usuarioAdquirido');
-    }
-
     public function savedPosts()
     {
         return $this->hasMany(SavePost::class, 'user_id');

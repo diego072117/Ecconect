@@ -28,11 +28,6 @@ class Posts extends Model
         return $this->belongsTo(Usuario::class, 'id_usuarioCreador');
     }
 
-    public function usuarioAdquirido()  
-    {
-        return $this->belongsTo(Usuario::class, 'id_usuarioAdquirido');
-    }
-
     public function comments()
     {
         return $this->hasMany(Comment::class, 'id_post');
