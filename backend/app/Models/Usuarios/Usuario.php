@@ -2,6 +2,7 @@
 
 namespace App\Models\Usuarios;
 
+use App\Models\Califications\califications;
 use App\Models\Comment\Comment;
 use App\Models\Followers\Follower;
 use App\Models\Posts\Posts;
@@ -39,6 +40,11 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->hasMany(Posts::class, 'id_usuarioCreador');
     }
 
+    public function receivedPosts()
+    {
+        return $this->hasMany(Posts::class, 'id_usuarioAdquirido');
+    }
+
     public function savedPosts()
     {
         return $this->hasMany(SavePost::class, 'user_id');
@@ -53,6 +59,16 @@ class Usuario extends Authenticatable implements JWTSubject
     public function followings()
     {
         return $this->hasMany(Follower::class, 'follower_id');
+    }
+
+    public function calificationsAsPostOwner()  // Relación para usuarioPost
+    {
+        return $this->hasMany(califications::class, 'id_usuarioPost');
+    }
+
+    public function calificationsAsDonatedUser()  // Relación para usuarioDonado
+    {
+        return $this->hasMany(Califications::class, 'id_usuariodonado');
     }
 
     public function getJWTIdentifier()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Califications\CalificationsController;
 use App\Http\Controllers\Followers\FollowerController;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Usuarios\UsuarioController;
@@ -42,4 +43,9 @@ Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class]
     Route::get('/Followings/{follower_id}', 'getFollowings');
     Route::get('/CheckFollowing/{follower_id}/{followed_id}', 'checkIfFollowing');
 });
+
+Route::group(['prefix' => 'Calification', 'controller' => CalificationsController::class], function () {
+    Route::post('/SaveCalification', 'store');
+});
+
 

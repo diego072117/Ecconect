@@ -18,12 +18,18 @@ class Posts extends Model
         'descripcion',
         'publicacion',
         'id_usuarioCreador',
-        'like',
+        'id_usuarioAdquirido',
+        'state',
     ];
 
     public function usuarioCreador()
     {
         return $this->belongsTo(Usuario::class, 'id_usuarioCreador');
+    }
+
+    public function usuarioAdquirido()  
+    {
+        return $this->belongsTo(Usuario::class, 'id_usuarioAdquirido');
     }
 
     public function comments()
