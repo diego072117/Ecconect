@@ -13,7 +13,7 @@ export const Nav = () => {
   return (
     <nav className="leftsidebar">
       <div className="items-nav">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" translate="no">
           <img
             src="/assets/icons/favicon.ico"
             alt="logo"
