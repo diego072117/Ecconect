@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Califications;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Califications\CreateCalification;
-use App\Models\Califications\califications; 
+use App\Models\Califications\califications;
 
 class CalificationsController extends Controller
 {
@@ -17,6 +17,7 @@ class CalificationsController extends Controller
         califications::create([
             'id_usuarioPost' => $validatedData['id_usuarioPost'],
             'id_usuariodonado' => $validatedData['id_usuariodonado'],
+            'id_post' => $validatedData['id_post'],
             'calification' => $validatedData['calification'],
         ]);
 

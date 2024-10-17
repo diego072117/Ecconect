@@ -2,6 +2,7 @@
 
 namespace App\Models\Califications;
 
+use App\Models\Posts\Posts;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ class califications extends Model
     protected $fillable = [
         'id_usuarioPost',
         'id_usuariodonado',
+        'id_post',
         'calification',
     ];
 
@@ -26,5 +28,10 @@ class califications extends Model
     public function usuarioDonado()
     {
         return $this->belongsTo(Usuario::class, 'id_usuariodonado');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Posts::class, 'id_post'); 
     }
 }

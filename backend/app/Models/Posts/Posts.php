@@ -2,6 +2,7 @@
 
 namespace App\Models\Posts;
 
+use App\Models\Califications\califications;
 use App\Models\Comment\Comment;
 use App\Models\Usuarios\Usuario;
 use App\Models\Posts\SavePost;
@@ -40,5 +41,10 @@ class Posts extends Model
     public function savedByUsers()
     {
         return $this->hasMany(SavePost::class, 'post_id');
+    }
+
+    public function califications()
+    {
+        return $this->hasMany(califications::class, 'id_post');
     }
 }

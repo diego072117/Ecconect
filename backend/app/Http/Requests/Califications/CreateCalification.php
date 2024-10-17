@@ -24,6 +24,7 @@ class CreateCalification extends FormRequest
         return [
             'id_usuarioPost' => ['required'],
             'id_usuariodonado' => ['required'],
+            'id_post' => ['required', 'exists:posts,id'],
             'calification' => ['required', 'integer', 'between:1,5'],
         ];
     }
@@ -31,11 +32,13 @@ class CreateCalification extends FormRequest
     public function messages()
     {
         return [
-            'id_usuarioPost.required' => 'La imagen es requerida.',
+            'id_usuarioPost.required' => 'es requerida.',
 
-            'id_usuariodonado.required' => 'La imagen es requerida.',
+            'id_usuariodonado.required' => 'es requerida.',
 
-            'calification.required' => 'La imagen es requerida.',
+            'id_post.required' => 'es requerida.',
+
+            'calification.required' => 'es requerida.',
         ];
     }
 }
