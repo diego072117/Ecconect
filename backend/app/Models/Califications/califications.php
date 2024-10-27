@@ -18,6 +18,7 @@ class califications extends Model
         'id_usuariodonado',
         'id_post',
         'calification',
+        'calificado'
     ];
 
     public function usuarioPost()

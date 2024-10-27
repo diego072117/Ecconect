@@ -4,7 +4,7 @@ namespace App\Http\Requests\Califications;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCalification extends FormRequest
+class UpdateCalification extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,6 @@ class CreateCalification extends FormRequest
     public function rules(): array
     {
         return [
-            'id_usuarioPost' => ['required'],
-            'id_usuariodonado' => ['required'],
-            'id_post' => ['required', 'exists:posts,id'],
             'calification' => [ 'integer', 'between:1,5'],
         ];
     }
@@ -32,12 +29,6 @@ class CreateCalification extends FormRequest
     public function messages()
     {
         return [
-            'id_usuarioPost.required' => 'es requerida.',
-
-            'id_usuariodonado.required' => 'es requerida.',
-
-            'id_post.required' => 'es requerida.',
-
             'calification.integer' => 'debe ser un numero.',
         ];
     }

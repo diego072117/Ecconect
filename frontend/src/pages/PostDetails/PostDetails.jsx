@@ -39,8 +39,7 @@ export const PostDetails = () => {
     }
   };
 
-  const handleFinishPost = async () => {
-    await finishPost(id); 
+  const refreshPostData = async () => {
     await postsById(id);
   };
 
@@ -93,7 +92,7 @@ export const PostDetails = () => {
             </Link>
             {user.id === post.usuario_creador.id ? (
               <div className="actions-post">
-                <button
+                {/* <button
                   onClick={() => {
                     if (post.state === "activo") {
                       handleFinishPost();
@@ -105,7 +104,7 @@ export const PostDetails = () => {
                   }}
                 >
                   <FaCheckCircle />
-                </button>
+                </button> */}
                 <Link to={`/update-post/${post.id}`} className="icon">
                   <img
                     src={"/assets/icons/edit.svg"}
@@ -158,7 +157,15 @@ export const PostDetails = () => {
           </form>
         </div>
       )}
-      {commentsPost.length != 0 ? <CommentsPost comments={commentsPost} /> : ""}
+      {commentsPost.length != 0 ? (
+        <CommentsPost
+          comments={commentsPost}
+          post={post}
+          refreshPostData={refreshPostData}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

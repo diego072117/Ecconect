@@ -35,9 +35,22 @@
       flex-grow: 1;
       word-wrap: break-word;
       word-break: break-word;
+
       .info-user-comment {
         display: flex;
+        justify-content: space-between;
         margin-bottom: 10px;
+        .user-comment {
+          display: flex;
+        }
+        .icon-calification {
+          font-size: 24px;
+          background-color: transparent;
+          border: none;
+          margin-right: 10px;
+          cursor: pointer;
+          color: #877eff;
+        }
         .name-comment {
           font-weight: 600;
         }
