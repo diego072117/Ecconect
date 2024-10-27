@@ -17,8 +17,7 @@ class CalificationsController extends Controller
         califications::create([
             'id_usuarioPost' => $validatedData['id_usuarioPost'],
             'id_usuariodonado' => $validatedData['id_usuariodonado'],
-            'id_post' => $validatedData['id_post'],
-            'calification' => $validatedData['calification'],
+            'id_post' => $validatedData['id_post']
         ]);
 
         return response()->json([

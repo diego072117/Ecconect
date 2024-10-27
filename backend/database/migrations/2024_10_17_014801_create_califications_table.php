@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuariodonado');
             $table->unsignedBigInteger('id_post');
             $table->unsignedTinyInteger('calification')->nullable();
+            $table->boolean('calificado')->default(false);
             $table->timestamps();
 
             // Definición de claves foráneas

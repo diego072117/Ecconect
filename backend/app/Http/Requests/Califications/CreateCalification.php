@@ -25,7 +25,7 @@ class CreateCalification extends FormRequest
             'id_usuarioPost' => ['required'],
             'id_usuariodonado' => ['required'],
             'id_post' => ['required', 'exists:posts,id'],
-            'calification' => ['required', 'integer', 'between:1,5'],
+            'calification' => [ 'integer', 'between:1,5'],
         ];
     }
 
@@ -38,7 +38,7 @@ class CreateCalification extends FormRequest
 
             'id_post.required' => 'es requerida.',
 
-            'calification.required' => 'es requerida.',
+            'calification.integer' => 'debe ser un numero.',
         ];
     }
 }
