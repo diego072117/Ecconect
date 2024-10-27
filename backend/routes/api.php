@@ -46,6 +46,6 @@ Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class]
 
 Route::group(['prefix' => 'Calification', 'controller' => CalificationsController::class], function () {
     Route::post('/SaveCalification', 'store');
+    Route::get('/GetCalificationsByUsuarioDonado/{id}', 'getByUsuarioDonado');
+    Route::put('/UpdateCalification/{id}', 'updateCalification');
 });
-
-
