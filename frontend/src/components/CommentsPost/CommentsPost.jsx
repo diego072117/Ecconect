@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 const { VITE_URL_API_IMG } = import.meta.env;
 import { useCalificationActions } from "../../hooks/useCalifications";
-  import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Module.scss";
+import { useValidators } from "../../hooks/useValidators";
 
 export const CommentsPost = ({ comments, post, refreshPostData }) => {
   const user = useSelector((state) => state.users.auth.user);
   const { calificationPost } = useCalificationActions();
+  const { isPostCreator, isPostActive } = useValidators();
 
   const handleCalificationhPost = async (userComment_id) => {
     const result = await calificationPost({
@@ -48,16 +50,18 @@ export const CommentsPost = ({ comments, post, refreshPostData }) => {
                     @{comment.usuario.username}
                   </p>
                 </div>
-                {post.state === "activo" && comment.id_user != user.id && (
-                  <button
-                    onClick={() => {
-                      handleCalificationhPost(comment.usuario.id);
-                    }}
-                    className="icon-calification"
-                  >
-                    <FaCheckCircle />
-                  </button>
-                )}
+                {isPostCreator() &&
+                  isPostActive() &&
+                  post.usuario_creador.id != comment.usuario.id && (
+                    <button
+                      onClick={() => {
+                        handleCalificationhPost(comment.usuario.id);
+                      }}
+                      className="icon-calification"
+                    >
+                      <FaCheckCircle />
+                    </button>
+                  )}
               </div>
 
               <p>{comment.coment}</p>
