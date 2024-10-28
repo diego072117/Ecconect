@@ -14,10 +14,15 @@ export const sidebarLinks = [
     route: "/all-users",
     label: "People",
   },
+  // {
+  //   imgURL: "/assets/icons/bookmark.svg",
+  //   route: "/saved",
+  //   label: "Saved",
+  // },
   {
-    imgURL: "/assets/icons/bookmark.svg",
-    route: "/saved",
-    label: "Saved",
+    imgURL: "/assets/icons/star.svg",
+    route: "/ratings",
+    label: "ratings",
   },
   {
     imgURL: "/assets/icons/gallery-add.svg",
@@ -37,10 +42,15 @@ export const bottombarLinks = [
     route: "/explore",
     label: "Explore",
   },
+  // {
+  //   imgURL: "/assets/icons/bookmark.svg",
+  //   route: "/saved",
+  //   label: "Saved",
+  // },
   {
-    imgURL: "/assets/icons/bookmark.svg",
-    route: "/saved",
-    label: "Saved",
+    imgURL: "/assets/icons/star.svg",
+    route: "/ratings",
+    label: "ratings",
   },
   {
     imgURL: "/assets/icons/gallery-add.svg",

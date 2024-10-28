@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuarioPost');
             $table->unsignedBigInteger('id_usuariodonado');
             $table->unsignedBigInteger('id_post');
-            $table->unsignedTinyInteger('calification')->nullable();
+            $table->decimal('calification', 2, 1)->nullable();
             $table->boolean('calificado')->default(false);
             $table->timestamps();
 

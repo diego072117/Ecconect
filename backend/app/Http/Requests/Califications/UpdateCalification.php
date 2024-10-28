@@ -22,7 +22,7 @@ class UpdateCalification extends FormRequest
     public function rules(): array
     {
         return [
-            'calification' => [ 'integer', 'between:1,5'],
+            'calification' => ['numeric', 'min:0.5', 'max:5', 'regex:/^[0-5](\.[05])?$/'],
         ];
     }
 
