@@ -1,6 +1,10 @@
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { createCalificationAsync } from "../store/calification/slice";
+import {
+  createCalificationAsync,
+  donatedUserRatingAsync,
+  getAllCalificationsAsync,
+} from "../store/calification/slice";
 import { finishPostAsync } from "../store/posts/slice";
 
 export const useCalificationActions = () => {
@@ -31,7 +35,17 @@ export const useCalificationActions = () => {
     }
   };
 
+  const listCalifications = async (user_id) => {
+    return dispatch(getAllCalificationsAsync(user_id));
+  };
+
+  const donatedUserRating = async (infoCalification) => {
+    return dispatch(donatedUserRatingAsync(infoCalification));
+  };
+
   return {
     calificationPost,
+    listCalifications,
+    donatedUserRating,
   };
 };

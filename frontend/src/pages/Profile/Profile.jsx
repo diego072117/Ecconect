@@ -8,6 +8,7 @@ import { Loader } from "../../shared/Loader";
 import { useFollowersActions } from "../../hooks/useFollowersActions";
 import { RiUserFollowFill } from "react-icons/ri";
 import { RiUserUnfollowFill } from "react-icons/ri";
+import ReactStars from "react-rating-stars-component";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
@@ -57,6 +58,8 @@ export const Profile = () => {
       </div>
     );
 
+  console.log(user);
+
   return (
     <div className="profile-content">
       <div className="container-profile">
@@ -73,7 +76,25 @@ export const Profile = () => {
             />
             <div className="info-user-profile">
               <p className="user-name">{user.name}</p>
-              <p className="tag-name">@{user.username}</p>
+              <div className="username-tag">
+                <p className="tag-name">@{user.username}</p>
+                {user.average_calification && (
+                  <div className="starts-profile">
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      isHalf={true}
+                      emptyIcon={<i className="far fa-star"></i>}
+                      halfIcon={<i className="fa fa-star-half-alt"></i>}
+                      fullIcon={<i className="fa fa-star"></i>}
+                      activeColor="#877eff"
+                      color="#1f1f22"
+                      value={parseFloat(user.average_calification)}
+                      edit={false}
+                    />
+                  </div>
+                )}
+              </div>
               <div className="info-acount">
                 <p className="posts">
                   <span>{postsByUser.posts?.length}</span> Posts

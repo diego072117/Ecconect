@@ -14,6 +14,7 @@ import { Explore } from "../pages/Explore/Explore";
 import { Saved } from "../pages/Saved/Saved";
 import { PostDetails } from "../pages/PostDetails/PostDetails";
 import { UpdatePost } from "../pages/UpdatePost/UpdatePost";
+import { Califications } from "../pages/Califications/Califications";
 
 export const AppRouter = () => {
   const { isUserAuthenticated } = useValidators();
@@ -45,6 +46,7 @@ export const AppRouter = () => {
           <Route path="/update-post/:id" element={<UpdatePost />} />
           <Route path="/all-users" element={<People />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/ratings" element={<Califications />} />
           <Route path="/saved" element={<Saved />} />
         </Route>
       </Routes>
