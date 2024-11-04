@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('telefono', 15);
             $table->string('avatar')->nullable();
+            $table->boolean('isAdmin')->default(false);
             $table->string('password');
             $table->timestamps();
             $table->softDeletes(); 

@@ -15,9 +15,12 @@ import { Saved } from "../pages/Saved/Saved";
 import { PostDetails } from "../pages/PostDetails/PostDetails";
 import { UpdatePost } from "../pages/UpdatePost/UpdatePost";
 import { Califications } from "../pages/Califications/Califications";
+import { HomeAdmin } from "../pages/HomeAdmin/HomeAdmin";
+import { UsersAdmin } from "../pages/UsersAdmin/UsersAdmin";
+import { PostsAdmin } from "../pages/PostsAdmin/PostsAdmin";
 
 export const AppRouter = () => {
-  const { isUserAuthenticated } = useValidators();
+  const { isUserAuthenticated, isAdmin } = useValidators();
 
   return (
     <>
@@ -48,6 +51,19 @@ export const AppRouter = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path="/ratings" element={<Califications />} />
           <Route path="/saved" element={<Saved />} />
+        </Route>
+        <Route
+          element={
+            isUserAuthenticated() && isAdmin() ? (
+              <RootLayout />
+            ) : (
+              <Navigate to="/login-user" />
+            )
+          }
+        >
+          <Route path="/home-admin" element={<HomeAdmin />} />
+          <Route path="/users-admin" element={<UsersAdmin />} />
+          <Route path="/posts-admin" element={<PostsAdmin />} />
         </Route>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

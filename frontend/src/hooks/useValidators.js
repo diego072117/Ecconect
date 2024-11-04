@@ -17,9 +17,14 @@ export const useValidators = () => {
     return postById.state === "activo";
   };
 
+  const isAdmin = () => {
+    return user.isAdmin ;
+  };
+
   return {
     isUserAuthenticated,
     isPostCreator,
     isPostActive,
+    isAdmin,
   };
 };

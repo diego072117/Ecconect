@@ -58,3 +58,21 @@ export const bottombarLinks = [
     label: "Create",
   },
 ];
+
+export const sidebarLinksAdmin = [
+  {
+    imgURL: "/assets/icons/home.svg",
+    route: "/home-admin",
+    label: "Home",
+  },
+  {
+    imgURL: "/assets/icons/home.svg",
+    route: "/users-admin",
+    label: "Users",
+  },
+  {
+    imgURL: "/assets/icons/home.svg",
+    route: "/posts-admin",
+    label: "Posts",
+  },
+];

@@ -92,4 +92,17 @@ class UsuarioController extends Controller
 
         return $user;
     }
+
+    public function getTopUsersByPosts()
+    {
+        $users = Usuario::withCount(['posts' => function ($query) {
+            $query->where('created_at', '>=', now()->subMonth());
+        }])
+            ->having('posts_count', '>', 0) 
+            ->orderBy('posts_count', 'desc')
+            ->take(6)
+            ->get();
+
+        return response()->json($users);
+    }
 }
