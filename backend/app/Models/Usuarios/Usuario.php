@@ -26,6 +26,7 @@ class Usuario extends Authenticatable implements JWTSubject
         'telefono',
         'avatar',
         'isAdmin',
+        'isBan',
         'password',
     ];
 

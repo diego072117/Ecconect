@@ -6,6 +6,7 @@ import {
   getPostById,
   getPostByUserId,
   getSearchPostAsync,
+  getTopCommetsPostAsync,
   saveCommentAsync,
   updatePostAsync,
 } from "../store/posts/slice";
@@ -45,6 +46,10 @@ export const usePostActions = () => {
     dispatch(getSearchPostAsync(searchProperty));
   };
 
+  const topCommentedPosts = async () => {
+    dispatch(getTopCommetsPostAsync());
+  };
+
   return {
     createPost,
     listPosts,
@@ -54,5 +59,6 @@ export const usePostActions = () => {
     commetPost,
     saveComment,
     searchPosts,
+    topCommentedPosts,
   };
 };

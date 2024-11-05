@@ -28,16 +28,12 @@ export const Login = () => {
   const { status } = useSelector((state) => state.users);
   const user = useSelector((state) => state.users.auth.access_token);
   const userAdmin = useSelector((state) => state.users.auth.user);
-  console.log(userAdmin);
+
   useEffect(() => {
     if (user != false) {
       if (userAdmin.isAdmin === 1) {
-        console.log("adin");
-
         navigate("/home-admin");
       } else {
-        console.log("no admin");
-
         navigate("/");
       }
     }

@@ -52,6 +52,7 @@ export const AppRouter = () => {
           <Route path="/ratings" element={<Califications />} />
           <Route path="/saved" element={<Saved />} />
         </Route>
+        {/* Private admin routes */}
         <Route
           element={
             isUserAuthenticated() && isAdmin() ? (

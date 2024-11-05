@@ -7,6 +7,7 @@ const initialState = {
   searchPost: [],
   postsByUser: [],
   commentsPost: [],
+  mostCommentedPosts: [],
   postById: null,
   status: "idle",
   error: null,
@@ -134,6 +135,20 @@ export const getSearchPostAsync = createAsyncThunk(
   }
 );
 
+export const getTopCommetsPostAsync = createAsyncThunk(
+  "post/getTopCommetsPostAsync",
+  async () => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Posts/posts/most-commented`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -241,6 +256,17 @@ const postsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error("No se enconstrar publicaciones relacionadas.");
+      })
+      .addCase(getTopCommetsPostAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTopCommetsPostAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.mostCommentedPosts = action.payload;
+      })
+      .addCase(getTopCommetsPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });

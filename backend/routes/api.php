@@ -24,6 +24,7 @@ Route::group(['prefix' => 'Users', 'controller' => UsuarioController::class], fu
     Route::post('/Login', 'loginUser');
     Route::post('/UpdateUser/{id}', 'updateUser');
     Route::get('/users/top-posters', 'getTopUsersByPosts');
+    Route::put('/ToggleBan/{id}', 'toggleBanStatus');
 });
 
 Route::group(['prefix' => 'Posts', 'controller' => PostController::class], function () {
