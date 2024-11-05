@@ -151,4 +151,16 @@ class PostController extends Controller
 
         return response()->json(['postsSearchByUser' => $posts], 200);
     }
+
+    public function getMostCommentedPosts()
+    {
+        $posts = Posts::with(['usuarioCreador'])
+            ->withCount('comments') // Cuenta los comentarios relacionados
+            ->having('comments_count', '>', 0) // Excluye posts con 0 comentarios
+            ->orderBy('comments_count', 'desc') // Ordena por número de comentarios en orden descendente
+            ->take(6) // Limita el resultado a los 6 más comentados
+            ->get();
+
+        return response()->json($posts);
+    }
 }

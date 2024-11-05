@@ -92,4 +92,35 @@ class UsuarioController extends Controller
 
         return $user;
     }
+
+    public function getTopUsersByPosts()
+    {
+        $users = Usuario::withCount(['posts' => function ($query) {
+            $query->where('created_at', '>=', now()->subMonth());
+        }])
+            ->having('posts_count', '>', 0)
+            ->orderBy('posts_count', 'desc')
+            ->take(6)
+            ->get();
+
+        return response()->json($users);
+    }
+
+    public function toggleBanStatus($id)
+    {
+        $user = Usuario::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        // Cambiar el valor de isBan a su opuesto
+        $user->isBan = !$user->isBan;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Estado de ban actualizado',
+            'isBan' => $user->isBan
+        ]);
+    }
 }

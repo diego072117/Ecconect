@@ -27,9 +27,15 @@ export const Login = () => {
 
   const { status } = useSelector((state) => state.users);
   const user = useSelector((state) => state.users.auth.access_token);
+  const userAdmin = useSelector((state) => state.users.auth.user);
+
   useEffect(() => {
     if (user != false) {
-      navigate("/");
+      if (userAdmin.isAdmin === 1) {
+        navigate("/home-admin");
+      } else {
+        navigate("/");
+      }
     }
   }, [user]);
 

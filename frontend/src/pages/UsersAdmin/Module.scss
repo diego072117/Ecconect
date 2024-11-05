@@ -1,0 +1,15 @@
+.container-table-users {
+  padding: 2em 5em;
+}
+
+.button-ban {
+  font-size: 20px;
+  color: #fff;
+  background-color: #877eff;
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  img {
+    filter: brightness(0) invert(1);
+  }
+}

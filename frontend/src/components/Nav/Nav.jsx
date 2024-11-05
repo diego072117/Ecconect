@@ -1,19 +1,27 @@
 import { useSelector } from "react-redux";
 import { UseUserActions } from "../../hooks/UseUserActions";
+import { useValidators } from "../../hooks/useValidators";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { sidebarLinks } from "../../constants";
+import { sidebarLinks, sidebarLinksAdmin } from "../../constants";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const Nav = () => {
   const { LogoutUser } = UseUserActions();
+  const { isAdmin } = useValidators();
   const { pathname } = useLocation();
   const user = useSelector((state) => state.users.auth.user);
+
+  const sidebarUser = isAdmin() ? sidebarLinksAdmin : sidebarLinks;
 
   return (
     <nav className="leftsidebar">
       <div className="items-nav">
-        <Link to="/" className="logo" translate="no">
+        <Link
+          to={isAdmin() ? `/home-admin` : "/"}
+          className="logo"
+          translate="no"
+        >
           <img
             src="/assets/icons/favicon.ico"
             alt="logo"
@@ -38,7 +46,7 @@ export const Nav = () => {
           </div>
         </Link>
         <div className="flex flex-col gap-6 options-nav">
-          {sidebarLinks.map((link) => {
+          {sidebarUser.map((link) => {
             const isActive = pathname === link.route;
             return (
               <div key={link.label} className="leftsidebar-link">

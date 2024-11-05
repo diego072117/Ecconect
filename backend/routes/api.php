@@ -23,6 +23,8 @@ Route::group(['prefix' => 'Users', 'controller' => UsuarioController::class], fu
     Route::get('/GeAlltUsers', 'getAllUsers');
     Route::post('/Login', 'loginUser');
     Route::post('/UpdateUser/{id}', 'updateUser');
+    Route::get('/users/top-posters', 'getTopUsersByPosts');
+    Route::put('/ToggleBan/{id}', 'toggleBanStatus');
 });
 
 Route::group(['prefix' => 'Posts', 'controller' => PostController::class], function () {
@@ -36,6 +38,7 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::get('/PostComment/{id}', 'getCommentsByPost');
     Route::put('/FinishPost/{id}', 'finishPost');
     Route::get('/SearchPosts', 'searchPosts');
+    Route::get('/posts/most-commented', 'getMostCommentedPosts');
 });
 
 Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class], function () {
