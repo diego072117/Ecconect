@@ -45,6 +45,54 @@ export const columns = [
   },
 ];
 
+export const columnsPosts = [
+  {
+    id: "id",
+    name: "ID",
+    selector: (row) => row.id,
+    sortable: true,
+    width: "60px",
+  },
+  {
+    name: "Description",
+    selector: (row) => row.descripcion,
+    sortable: true,
+  },
+  {
+    name: "State",
+    selector: (row) => row.state,
+    sortable: true,
+  },
+  {
+    name: "Owner",
+    selector: (row) => row.usuario_creador.name,
+    sortable: true,
+  },
+  {
+    name: "Username",
+    selector: (row) => row.usuario_creador.username,
+    sortable: true,
+  },
+  {
+    name: "Email",
+    selector: (row) => row.usuario_creador.email,
+    sortable: true,
+  },
+  {
+    name: "Phone",
+    selector: (row) => row.usuario_creador.telefono,
+    sortable: true,
+  },
+  {
+    name: "Created At",
+    selector: (row) =>
+      row.created_at
+        ? format(new Date(row.created_at), "yyyy-MM-dd HH:mm")
+        : "N/A",
+    sortable: true,
+  },
+];
+
 export const customStyles = {
   header: {
     style: {

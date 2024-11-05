@@ -1,5 +1,5 @@
 .container-table-users {
-  padding: 2em 5em;
+  padding: 2em 2em;
 }
 
 .button-ban {
@@ -12,4 +12,22 @@
   img {
     filter: brightness(0) invert(1);
   }
+}
+
+.header-container {
+  display: flex;
+  color: #fff;
+  font-family: "Inter";
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.search-input {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #1f1f22;
+  color: #fff;
 }
