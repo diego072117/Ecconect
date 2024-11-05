@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Califications;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Califications\CreateCalification;
 use App\Http\Requests\Califications\UpdateCalification;
+use App\Mail\PendingCalificationMail;
 use App\Models\Califications\califications;
+use App\Models\Usuarios\Usuario;
+use Illuminate\Support\Facades\Mail;
 
 class CalificationsController extends Controller
 {
@@ -21,8 +24,17 @@ class CalificationsController extends Controller
             'id_post' => $validatedData['id_post']
         ]);
 
+        // Buscar el usuario donado por id
+        $userDonado = Usuario::find($validatedData['id_usuariodonado']);
+
+        if ($userDonado) {
+            // Enviar el correo
+            //dd($userDonado->email);
+            Mail::to($userDonado->email)->send(new PendingCalificationMail($userDonado));
+        }
+
         return response()->json([
-            'message' => 'Calificación registrada correctamente.'
+            'message' => 'Calificación registrada correctamente y correo enviado.'
         ], 201);
     }
 
