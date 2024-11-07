@@ -71,7 +71,7 @@ export const sidebarLinksAdmin = [
     label: "Users",
   },
   {
-    imgURL: "/assets/icons/home.svg",
+    imgURL: "/assets/icons/wallpaper.svg",
     route: "/posts-admin",
     label: "Posts",
   },

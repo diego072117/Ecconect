@@ -4,11 +4,13 @@ import { FaCheckCircle } from "react-icons/fa";
 const { VITE_URL_API_IMG } = import.meta.env;
 import { useCalificationActions } from "../../hooks/useCalifications";
 import { useSelector } from "react-redux";
-import "./Module.scss";
 import { useValidators } from "../../hooks/useValidators";
+import { Loader } from "../../shared/Loader";
+import "./Module.scss";
 
 export const CommentsPost = ({ comments, post, refreshPostData }) => {
   const user = useSelector((state) => state.users.auth.user);
+  const { status } = useSelector((state) => state.califications);
   const { calificationPost } = useCalificationActions();
   const { isPostCreator, isPostActive } = useValidators();
 
@@ -58,8 +60,13 @@ export const CommentsPost = ({ comments, post, refreshPostData }) => {
                         handleCalificationhPost(comment.usuario.id);
                       }}
                       className="icon-calification"
+                      disabled={status === "loading"}
                     >
-                      <FaCheckCircle />
+                      {status === "loading" ? (
+                        <Loader /> 
+                      ) : (
+                        <FaCheckCircle />
+                      )}
                     </button>
                   )}
               </div>

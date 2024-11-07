@@ -4,6 +4,8 @@ use App\Http\Controllers\Califications\CalificationsController;
 use App\Http\Controllers\Followers\FollowerController;
 use App\Http\Controllers\Posts\PostController;
 use App\Http\Controllers\Usuarios\UsuarioController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PendingCalificationMail;
 use Illuminate\Support\Facades\Route;
 
 /*
