@@ -90,6 +90,14 @@ body,p,ul,h1,h2,h3,p,h4{
   background-color: #1f1f22;
 }
 
+.export-button{
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5em;
+  color: #fff;
+  background-color: #877eff;
+}
+
 @media (max-width: 768px) {
   .layout{
     display: block;

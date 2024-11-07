@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import { UseUserActions } from "../../hooks/UseUserActions";
 import {
   columns as baseColumns,
@@ -10,13 +12,14 @@ import { Loader } from "../../shared/Loader";
 const { VITE_URL_API_IMG } = import.meta.env;
 import { LuBan } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
-import "./Module.scss";
 import { Link } from "react-router-dom";
+import { CiFileOn } from "react-icons/ci";
+import "./Module.scss";
 
 export const UsersAdmin = () => {
   const { allUsers, banUserById } = UseUserActions();
   const { users, status } = useSelector((state) => state.users);
-  const [filterText, setFilterText] = useState(""); // Estado para el filtro
+  const [filterText, setFilterText] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
@@ -37,12 +40,47 @@ export const UsersAdmin = () => {
     allUsers();
   };
 
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("User List", 20, 10);
+
+    const tableData = users.map((user) => [
+      user.id,
+      user.name,
+      user.email,
+      user.username,
+      user.telefono,
+      user.isBan ? "Ban" : "",
+      user.isAdmin ? "Admin" : "User",
+      user.created_at ? new Date(user.created_at).toLocaleString() : "N/A",
+    ]);
+
+    doc.autoTable({
+      head: [
+        [
+          "ID",
+          "Name",
+          "Email",
+          "Username",
+          "Phone",
+          "Ban",
+          "Role",
+          "Created At",
+        ],
+      ],
+      body: tableData,
+      startY: 20,
+    });
+
+    doc.save("user-list.pdf");
+  };
+
   const columns = [
     ...baseColumns,
     {
       name: "Avatar",
       cell: (row) => (
-        <Link /*to={`/profile/${row.id}`}*/>
+        <Link>
           <img
             src={
               row.avatar
@@ -94,13 +132,22 @@ export const UsersAdmin = () => {
     <div className="container-table-users">
       <div className="header-container">
         <h2>User List</h2>
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          className="search-input"
-        />
+        <div className="actions-table">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            className="search-input"
+          />
+          <button
+            onClick={exportToPDF}
+            className="export-button"
+            title="download pdf"
+          >
+            <CiFileOn />
+          </button>
+        </div>
       </div>
       <DataTable
         title=""

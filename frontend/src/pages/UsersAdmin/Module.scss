@@ -21,13 +21,17 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
-}
 
-.search-input {
-  width: 200px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #1f1f22;
-  color: #fff;
+  .actions-table {
+    display: flex;
+    .search-input {
+      width: 200px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #1f1f22;
+      color: #fff;
+      margin-right: 8px;
+    }
+  }
 }
