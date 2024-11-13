@@ -19,6 +19,7 @@ import { HomeAdmin } from "../pages/HomeAdmin/HomeAdmin";
 import { UsersAdmin } from "../pages/UsersAdmin/UsersAdmin";
 import { PostsAdmin } from "../pages/PostsAdmin/PostsAdmin";
 import { CalificationsAdmin } from "../pages/CalificationsAdmin/CalificationsAdmin";
+import { AboutUs } from "../pages/AboutUs/AboutUs";
 
 export const AppRouter = () => {
   const { isUserAuthenticated, isAdmin } = useValidators();
@@ -30,6 +31,7 @@ export const AppRouter = () => {
         <Route element={<AuthLayout />}>
           <Route path="/login-user" element={<Login />} />
           <Route path="/register-user" element={<Register />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Route>
 
         {/* Private routes */}
