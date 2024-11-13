@@ -75,4 +75,9 @@ export const sidebarLinksAdmin = [
     route: "/posts-admin",
     label: "Posts",
   },
+  {
+    imgURL: "/assets/icons/star.svg",
+    route: "/califications-admin",
+    label: "ratings",
+  },
 ];

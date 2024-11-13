@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import * as XLSX from "xlsx";
 import {
   columnsPosts as baseColumns,
   customStyles,
@@ -11,7 +12,8 @@ import { Loader } from "../../shared/Loader";
 const { VITE_URL_API_IMG } = import.meta.env;
 import { usePostActions } from "../../hooks/usePostActions";
 import { Link } from "react-router-dom";
-import { CiFileOn } from "react-icons/ci";
+import { FaFilePdf } from "react-icons/fa6";
+import { BsFiletypeXlsx } from "react-icons/bs";
 //import "./Module.scss";
 
 export const PostsAdmin = () => {
@@ -68,6 +70,29 @@ export const PostsAdmin = () => {
     doc.save("posts-list.pdf");
   };
 
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      posts.map((post) => ({
+        "ID": post.id,
+        "Descripcion Post": post.descripcion || "N/A",
+        "Estado Post": post?.state,
+        "Email": post.usuario_creador?.email || "N/A",
+        "Nombre": post.usuario_creador?.name || "N/A",
+        "Username": post.usuario_creador?.username || "N/A",
+        "Telefono": post.usuario_creador?.telefono || "N/A",
+        "Ban": post.usuario_creador.isban ? 'Si' : 'No',
+        "Creado el": post.created_at
+          ? new Date(post.created_at).toLocaleString()
+          : "N/A",
+      }))
+    );
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Posts");
+  
+    XLSX.writeFile(workbook, "posts-list.xlsx");
+  };
+
   const columns = [
     ...baseColumns,
     {
@@ -119,7 +144,14 @@ export const PostsAdmin = () => {
             className="export-button"
             title="Download PDF"
           >
-            <CiFileOn />
+            <FaFilePdf />
+          </button>
+          <button
+            onClick={exportToExcel}
+            className="export-button"
+            title="Download Excel"
+          >
+            <BsFiletypeXlsx/>
           </button>
         </div>
       </div>
