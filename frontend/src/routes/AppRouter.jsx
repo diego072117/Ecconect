@@ -18,6 +18,8 @@ import { Califications } from "../pages/Califications/Califications";
 import { HomeAdmin } from "../pages/HomeAdmin/HomeAdmin";
 import { UsersAdmin } from "../pages/UsersAdmin/UsersAdmin";
 import { PostsAdmin } from "../pages/PostsAdmin/PostsAdmin";
+import { CalificationsAdmin } from "../pages/CalificationsAdmin/CalificationsAdmin";
+import { AboutUs } from "../pages/AboutUs/AboutUs";
 
 export const AppRouter = () => {
   const { isUserAuthenticated, isAdmin } = useValidators();
@@ -29,6 +31,7 @@ export const AppRouter = () => {
         <Route element={<AuthLayout />}>
           <Route path="/login-user" element={<Login />} />
           <Route path="/register-user" element={<Register />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Route>
 
         {/* Private routes */}
@@ -65,6 +68,7 @@ export const AppRouter = () => {
           <Route path="/home-admin" element={<HomeAdmin />} />
           <Route path="/users-admin" element={<UsersAdmin />} />
           <Route path="/posts-admin" element={<PostsAdmin />} />
+          <Route path="/califications-admin" element={<CalificationsAdmin />} />
         </Route>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

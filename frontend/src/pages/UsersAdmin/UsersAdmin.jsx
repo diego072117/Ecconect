@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import * as XLSX from "xlsx";
 import { UseUserActions } from "../../hooks/UseUserActions";
 import {
   columns as baseColumns,
@@ -13,7 +14,8 @@ const { VITE_URL_API_IMG } = import.meta.env;
 import { LuBan } from "react-icons/lu";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { CiFileOn } from "react-icons/ci";
+import { FaFilePdf } from "react-icons/fa6";
+import { BsFiletypeXlsx } from "react-icons/bs";
 import "./Module.scss";
 
 export const UsersAdmin = () => {
@@ -73,6 +75,28 @@ export const UsersAdmin = () => {
     });
 
     doc.save("user-list.pdf");
+  };
+
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      users.map((user) => ({
+        "ID": user.id,
+        "Nombre": user?.name || "N/A",
+        "Username": user?.username || "N/A",
+        "Email": user?.email || "N/A",
+        "Telefono": user?.telefono || "N/A",
+        "Ban": user.isban ? 'Si' : 'No',
+        "Es Admin": user.isAdmin ? 'Si' : 'No',
+        "Creado el": user.created_at
+          ? new Date(user.created_at).toLocaleString()
+          : "N/A",
+      }))
+    );
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+  
+    XLSX.writeFile(workbook, "users-list.xlsx");
   };
 
   const columns = [
@@ -143,9 +167,16 @@ export const UsersAdmin = () => {
           <button
             onClick={exportToPDF}
             className="export-button"
-            title="download pdf"
+            title="Download PDF"
           >
-            <CiFileOn />
+            <FaFilePdf />
+          </button>
+          <button
+            onClick={exportToExcel}
+            className="export-button"
+            title="Download Excel"
+          >
+            <BsFiletypeXlsx/>
           </button>
         </div>
       </div>

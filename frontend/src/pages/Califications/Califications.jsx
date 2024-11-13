@@ -8,18 +8,18 @@ import { Loader } from "../../shared/Loader";
 const { VITE_URL_API_IMG } = import.meta.env;
 
 export const Califications = () => {
-  const { listCalifications } = useCalificationActions();
+  const { listCalificationsByUser } = useCalificationActions();
   const user = useSelector((state) => state.users.auth.user);
   const { calificationsUser, status } = useSelector(
     (state) => state.califications
   );
 
   useEffect(() => {
-    listCalifications(user.id);
+    listCalificationsByUser(user.id);
   }, []);
 
   const refreshdata = () => {
-    listCalifications(user.id);
+    listCalificationsByUser(user.id);
   };
 
   if (status === "loading")

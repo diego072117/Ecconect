@@ -1,0 +1,33 @@
+.about-us-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Inter";
+  padding: 2em;
+  .back-login {
+    margin-bottom: 1em;
+    .back-about {
+      color: #fff;
+      text-decoration: none;
+      p {
+        font-size: 15px;
+      }
+    }
+    h1 {
+        font-size: 2em;
+      color: #877eff;
+    }
+  }
+}
+
+.text-about {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+  color: #fff;
+}

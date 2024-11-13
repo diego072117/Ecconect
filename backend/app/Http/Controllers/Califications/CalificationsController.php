@@ -67,4 +67,12 @@ class CalificationsController extends Controller
             'data' => $calificacion
         ], 200);
     }
+
+    public function getAllCalifications()
+    {
+        // Obtener todas las calificaciones junto con las relaciones
+        $calificaciones = califications::with(['usuarioPost', 'usuarioDonado', 'post'])->get();
+
+        return  $calificaciones;
+    }
 }

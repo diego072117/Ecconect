@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Usuarios;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUser;
 use App\Http\Requests\User\UpdateUser;
+use App\Mail\UserBannedMail;
+use App\Mail\UserUnbannedMail;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -118,8 +121,17 @@ class UsuarioController extends Controller
         $user->isBan = !$user->isBan;
         $user->save();
 
+        // Enviar el correo según el nuevo estado de isBan
+        if ($user->isBan) {
+            Mail::to($user->email)->send(new UserBannedMail($user));
+            $message = 'El usuario ha sido baneado y se ha enviado un correo de notificación.';
+        } else {
+            Mail::to($user->email)->send(new UserUnbannedMail($user));
+            $message = 'El usuario ha sido desbaneado y se ha enviado un correo de notificación.';
+        }
+
         return response()->json([
-            'message' => 'Estado de ban actualizado',
+            'message' => $message,
             'isBan' => $user->isBan
         ]);
     }

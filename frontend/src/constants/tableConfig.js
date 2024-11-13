@@ -93,6 +93,54 @@ export const columnsPosts = [
   },
 ];
 
+export const columnsCalifications = [
+  {
+    id: "id",
+    name: "ID",
+    selector: (row) => row.id,
+    sortable: true,
+    width: "60px",
+  },
+  {
+    name: "qualified user",
+    selector: (row) => row.usuario_post.name,
+    sortable: true,
+  },
+  {
+    name: "qualified email",
+    selector: (row) => row.usuario_post.email,
+    sortable: true,
+  },
+  {
+    name: "user qualifies",
+    selector: (row) => row.usuario_donado.name,
+    sortable: true,
+  },
+  {
+    name: "email qualifies",
+    selector: (row) => row.usuario_donado.email,
+    sortable: true,
+  },
+  {
+    name: "# rating",
+    selector: (row) => row?.calification || "N/A",
+    sortable: true,
+  },
+  {
+    name: "rating",
+    selector: (row) => (row.calificado ? "Sí" : "No"),
+    sortable: true,
+  },
+  {
+    name: "Created At",
+    selector: (row) =>
+      row.created_at
+        ? format(new Date(row.created_at), "yyyy-MM-dd HH:mm")
+        : "N/A",
+    sortable: true,
+  },
+];
+
 export const customStyles = {
   header: {
     style: {

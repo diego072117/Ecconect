@@ -4,6 +4,7 @@ import {
   createCalificationAsync,
   donatedUserRatingAsync,
   getAllCalificationsAsync,
+  getAllCalificationsByUserAsync,
 } from "../store/calification/slice";
 import { finishPostAsync } from "../store/posts/slice";
 
@@ -35,17 +36,22 @@ export const useCalificationActions = () => {
     }
   };
 
-  const listCalifications = async (user_id) => {
-    return dispatch(getAllCalificationsAsync(user_id));
+  const listCalificationsByUser = async (user_id) => {
+    return dispatch(getAllCalificationsByUserAsync(user_id));
   };
 
   const donatedUserRating = async (infoCalification) => {
     return dispatch(donatedUserRatingAsync(infoCalification));
   };
 
+  const listCalifications = async () => {
+    return dispatch(getAllCalificationsAsync());
+  };
+
   return {
     calificationPost,
-    listCalifications,
+    listCalificationsByUser,
     donatedUserRating,
+    listCalifications,
   };
 };

@@ -53,4 +53,5 @@ Route::group(['prefix' => 'Calification', 'controller' => CalificationsControlle
     Route::post('/SaveCalification', 'store');
     Route::get('/GetCalificationsByUsuarioDonado/{id}', 'getByUsuarioDonado');
     Route::put('/UpdateCalification/{id}', 'updateCalification');
+    Route::get('/GetAllCalification', 'getAllCalifications');
 });

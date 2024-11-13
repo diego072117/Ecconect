@@ -87,6 +87,12 @@ export const Login = () => {
             Sign up
           </Link>
         </p>
+        <p>
+          let's get to know each other {" "}
+          <Link to="/about-us" className="link">
+            About us
+          </Link>
+        </p>
       </div>
     </div>
   );

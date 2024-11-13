@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   calificationsUser: [],
+  califications:[],
   status: "idle",
   error: null,
   mensaje: null,
@@ -26,8 +27,8 @@ export const createCalificationAsync = createAsyncThunk(
   }
 );
 
-export const getAllCalificationsAsync = createAsyncThunk(
-  "calification/getAllCalifications",
+export const getAllCalificationsByUserAsync = createAsyncThunk(
+  "calification/getAllCalificationsByUserAsync",
   async (user_id) => {
     try {
       const response = await axios.get(
@@ -55,6 +56,20 @@ export const donatedUserRatingAsync = createAsyncThunk(
   }
 );
 
+export const getAllCalificationsAsync = createAsyncThunk(
+  "calification/getAllCalifications",
+  async () => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_API}/Calification/GetAllCalification`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const calificationSlice = createSlice({
   name: "calification",
   initialState,
@@ -73,14 +88,14 @@ const calificationSlice = createSlice({
         state.error = action.error.message;
         toast.error("This didn't work.");
       })
-      .addCase(getAllCalificationsAsync.pending, (state) => {
+      .addCase(getAllCalificationsByUserAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getAllCalificationsAsync.fulfilled, (state, action) => {
+      .addCase(getAllCalificationsByUserAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.calificationsUser = action.payload;
       })
-      .addCase(getAllCalificationsAsync.rejected, (state, action) => {
+      .addCase(getAllCalificationsByUserAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");
@@ -92,6 +107,18 @@ const calificationSlice = createSlice({
         state.status = "succeeded";
       })
       .addCase(donatedUserRatingAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error("This didn't work.");
+      })
+      .addCase(getAllCalificationsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllCalificationsAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.califications = action.payload;
+      })
+      .addCase(getAllCalificationsAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
         toast.error("This didn't work.");

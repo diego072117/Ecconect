@@ -34,7 +34,6 @@ export const Register = () => {
   return (
     <div className="container-login">
       <div className="info-login">
-        <i className="fa-solid fa-earth-americas"></i>
         <div className="logo">
           <img
             src="/assets/icons/favicon.ico"
