@@ -7,6 +7,7 @@ use App\Http\Requests\Califications\CreateCalification;
 use App\Http\Requests\Califications\UpdateCalification;
 use App\Mail\PendingCalificationMail;
 use App\Models\Califications\califications;
+use App\Models\Posts\Posts;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,7 +18,7 @@ class CalificationsController extends Controller
         // Validar la request
         $validatedData = $request->validated();
 
-        // Crear la nueva calificación
+        //Crear la nueva calificación
         califications::create([
             'id_usuarioPost' => $validatedData['id_usuarioPost'],
             'id_usuariodonado' => $validatedData['id_usuariodonado'],
@@ -26,11 +27,18 @@ class CalificationsController extends Controller
 
         // Buscar el usuario donado por id
         $userDonado = Usuario::find($validatedData['id_usuariodonado']);
+        $userPost = Usuario::find($validatedData['id_usuarioPost']); 
+
+
 
         if ($userDonado) {
+            // Construir el arreglo con toda la información
+            $data = [
+                'usuarioDonado' => $userDonado, // Usuario que recibió
+                'usuarioPost' => $userPost, // Usuario que publicó
+            ];
             // Enviar el correo
-            //dd($userDonado->email);
-            Mail::to($userDonado->email)->send(new PendingCalificationMail($userDonado));
+            Mail::to($userDonado->email)->send(new PendingCalificationMail($data));
         }
 
         return response()->json([
