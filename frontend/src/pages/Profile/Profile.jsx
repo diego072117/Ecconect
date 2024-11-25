@@ -58,8 +58,6 @@ export const Profile = () => {
       </div>
     );
 
-  console.log(user);
-
   return (
     <div className="profile-content">
       <div className="container-profile">

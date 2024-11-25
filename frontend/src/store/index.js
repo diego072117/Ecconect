@@ -4,6 +4,7 @@ import usersSlice from "./users/slice";
 import postsSlice from "./posts/slice"
 import followersSlice from "./followes/slice"
 import calificationSlice from "./calification/slice"
+import gptSlice from "./gpt/slice"
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     posts: postsSlice,
     followers: followersSlice,
     califications: calificationSlice,
+    gpt: gptSlice,
   },
 });
 

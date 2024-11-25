@@ -21,9 +21,6 @@ export const CalificationsAdmin = () => {
   const [filterText, setFilterText] = useState("");
   const [filteredCalifications, setFilteredCalifications] = useState([]);
 
-console.log(califications);
-
-
   useEffect(() => {
     listCalifications();
   }, []);

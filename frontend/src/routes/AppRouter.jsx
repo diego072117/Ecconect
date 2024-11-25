@@ -20,6 +20,7 @@ import { UsersAdmin } from "../pages/UsersAdmin/UsersAdmin";
 import { PostsAdmin } from "../pages/PostsAdmin/PostsAdmin";
 import { CalificationsAdmin } from "../pages/CalificationsAdmin/CalificationsAdmin";
 import { AboutUs } from "../pages/AboutUs/AboutUs";
+import { EnvironmentalAdvisor } from "../pages/EnvironmentalAdvisor/EnvironmentalAdvisor";
 
 export const AppRouter = () => {
   const { isUserAuthenticated, isAdmin } = useValidators();
@@ -54,6 +55,7 @@ export const AppRouter = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path="/ratings" element={<Califications />} />
           <Route path="/saved" element={<Saved />} />
+          <Route path="/bot-ia" element={<EnvironmentalAdvisor />} />
         </Route>
         {/* Private admin routes */}
         <Route
