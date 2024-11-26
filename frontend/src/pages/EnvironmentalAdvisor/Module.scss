@@ -1,0 +1,79 @@
+.advisor-container {
+  font-family: "Inter";
+  color: #877eff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+  height: 100vh;
+  text-align: center;
+  margin: 2em;
+
+  .title {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    background-color: #09090a;
+    border: 1px solid rgba(31, 31, 34, 1);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    max-width: 1000px;
+
+    .advisor-textarea {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 16px;
+      padding: 5px;
+      resize: none; // Evita que el usuario redimensione manualmente el textarea
+      height: auto;
+      line-height: 1.5;
+      overflow-y: auto;
+    }
+    .mic-button {
+      background: #877eff;
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 18px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        background: #6d6de5;
+      }
+    }
+  }
+}
+
+.response-container {
+  margin-top: 20px;
+  text-align: left;
+  width: 100%;
+  max-width: 900px;
+
+  .loading {
+    color: #877eff;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .response {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    //white-space: pre-wrap;
+  }
+}

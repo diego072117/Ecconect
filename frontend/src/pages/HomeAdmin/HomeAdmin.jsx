@@ -18,8 +18,6 @@ export const HomeAdmin = () => {
     topCommentedPosts();
   }, []);
 
-  console.log(mostCommentedPosts);
-
   if (status === "loading")
     return (
       <div className="loader">

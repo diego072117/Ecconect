@@ -45,7 +45,7 @@ export const Nav = () => {
             <p className="tag-name">@{user.username}</p>
           </div>
         </Link>
-        <div className="flex flex-col gap-6 options-nav">
+        <div className="options-nav">
           {sidebarUser.map((link) => {
             const isActive = pathname === link.route;
             return (
