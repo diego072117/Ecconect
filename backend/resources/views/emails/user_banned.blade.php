@@ -38,7 +38,7 @@
             width: 100%;
             max-width: 346px;
             height: 228px;
-            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308256829419163709/8d955dacb77334525a7d5388f6b2f6c0.png?ex=673d489e&is=673bf71e&hm=884309649a9fe0b3bf3a784c2eac94ab4b4e7a6ce6129d5b946b9cdbf0f615b5&=&format=webp&quality=lossless&width=297&height=312");
+            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308256829419163709/8d955dacb77334525a7d5388f6b2f6c0.png?ex=674f14de&is=674dc35e&hm=befdd37638122ef00fa14ad7ee6a581e45fa2ce584cfd8b24a48c5563d4bb2d9&=&format=webp&quality=lossless&width=297&height=312");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -142,7 +142,7 @@
                 <div class="creator-info">
                     {{-- <img src="http://127.0.0.1:8000/storage/{{$data['usuarioPost']->avatar}}" alt=""> --}}
                     <img class="img"
-                        src="https://media.discordapp.net/attachments/1141220004910600345/1308258453608857621/ban-from-website.png?ex=673d4a21&is=673bf8a1&hm=700905bbb9abc1f09a7aa5210ad63e12cc658402f875616f63ea403a68b32f00&=&format=webp&quality=lossless&width=937&height=593"
+                        src="https://media.discordapp.net/attachments/1141220004910600345/1308234553076219976/profile-placeholder.jpg?ex=674f001f&is=674dae9f&hm=2a8191debc2287c45e93f0719192a5aaaa4414ff97b3bddfa9a9a11e2a885273&=&format=webp&width=67&height=67"
                         alt="Placeholder">
                     <p class="username-creator">{{ $user->username }}</p>
                     <p class="tag">BANNED</p>
@@ -156,23 +156,3 @@
 </body>
 
 </html>
-
-{{-- <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta Baneada</title>
-</head>
-<body>
-    <h1>Hola, {{ $user->name }}</h1>
-
-    <p>Lamentamos informarte que tu cuenta en nuestra plataforma ha sido baneada.</p>
-
-    <p>Si crees que esto es un error o deseas apelar esta decisión, por favor contacta a nuestro equipo de soporte.</p>
-
-    <p>Gracias,</p>
-    <p>El equipo de soporte</p>
-</body>
-</html> --}}

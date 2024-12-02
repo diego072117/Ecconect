@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
+  postsAdmin: [],
   searchPost: [],
   postsByUser: [],
   commentsPost: [],
@@ -39,6 +40,20 @@ export const getAllPostAsync = createAsyncThunk("post/getAllPost", async () => {
     throw new Error(error.message);
   }
 });
+
+export const getAllPostAdminAsync = createAsyncThunk(
+  "post/getAllPostAdminAsync",
+  async () => {
+    try {
+      const response = await axios.get(`${VITE_URL_API}/Posts/GetPostsAdmin`);
+      console.log(response.data);
+      
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
 
 export const getPostByUserId = createAsyncThunk(
   "post/getPostByUserId",
@@ -149,6 +164,20 @@ export const getTopCommetsPostAsync = createAsyncThunk(
   }
 );
 
+export const deletePostByIdAsync = createAsyncThunk(
+  "post/deletePostById",
+  async (postId) => {
+    try {
+      const response = await axios.delete(
+        `${VITE_URL_API}/Posts/deletePost/${postId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -175,6 +204,17 @@ const postsSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(getAllPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(getAllPostAdminAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllPostAdminAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.postsAdmin = action.payload;
+      })
+      .addCase(getAllPostAdminAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -265,6 +305,16 @@ const postsSlice = createSlice({
         state.mostCommentedPosts = action.payload;
       })
       .addCase(getTopCommetsPostAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deletePostByIdAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deletePostByIdAsync.fulfilled, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(deletePostByIdAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

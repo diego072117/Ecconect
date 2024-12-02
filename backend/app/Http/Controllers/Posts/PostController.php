@@ -62,6 +62,17 @@ class PostController extends Controller
         return response()->json(['posts' => $posts], 200);
     }
 
+    public function getAllPostsAdmin()
+    {
+        // Obtener todos los posts ordenados del más reciente al más viejo
+        $posts = Posts::orderBy('created_at', 'DESC')->get();
+
+        // Cargar la relación con el usuario creador para cada post
+        $posts->load('usuarioCreador');
+
+        return response()->json(['posts' => $posts], 200);
+    }
+
     public function getPostByUser($userId)
     {
         // Filtra los posts por el user_id proporcionado
@@ -163,4 +174,22 @@ class PostController extends Controller
 
         return response()->json($posts);
     }
+
+    public function deletePost($postId)
+    {
+        $post = Posts::findOrFail($postId);
+    
+        if (!$post) {
+            return response()->json(['message' => 'El post no fue encontrado'], 404);
+        }
+    
+        // Cambia el estado del post a 'finalizado'
+        $post->state = 'finalizado';
+        $post->save();
+    
+        $post->delete();
+    
+        return response()->json(['message' => 'Post finalizado y eliminado con éxito'], 200);
+    }
+    
 }

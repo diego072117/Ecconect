@@ -5,14 +5,14 @@ import { usePostActions } from "../../hooks/usePostActions";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CommentsPost } from "../../components/CommentsPost/CommentsPost";
-import { FaCheckCircle } from "react-icons/fa";
 const { VITE_URL_API_IMG } = import.meta.env;
 import "./Module.scss";
 
 export const PostDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { postsById, commetPost, saveComment, finishPost } = usePostActions();
+  const { postsById, commetPost, saveComment, deletePostById } =
+    usePostActions();
   const {
     postById: post,
     commentsPost,
@@ -37,6 +37,11 @@ export const PostDetails = () => {
       setComment("");
       commetPost(id); // Refresh comments
     }
+  };
+
+  const handleDeletePost = async () => {
+     await deletePostById(id);
+     navigate(-1)
   };
 
   const refreshPostData = async () => {
@@ -114,7 +119,13 @@ export const PostDetails = () => {
                   />
                 </Link>
 
-                <button variant="ghost" className="icon">
+                <button
+                  variant="ghost"
+                  className="icon"
+                  onClick={() => {
+                    handleDeletePost()
+                  }}
+                >
                   <img
                     src={"/assets/icons/delete.svg"}
                     alt="delete"

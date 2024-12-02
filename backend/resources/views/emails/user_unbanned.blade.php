@@ -38,7 +38,7 @@
             width: 100%;
             max-width: 346px;
             height: 228px;
-            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308266833643831346/CnzLKQ2xlAP6ti3Ddpoe0AHiGg.png?ex=673d51ef&is=673c006f&hm=022c1b26e42b967a155330a558c1b911734dc4564e436fb6b48feeffb801a645&=&format=webp&quality=lossless&width=891&height=593");
+            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308266833643831346/CnzLKQ2xlAP6ti3Ddpoe0AHiGg.png?ex=674f1e2f&is=674dccaf&hm=15b07e7e8489c21a2b4f7ddad56c45e77e4a62214d82385fe8c715d2e086bfd1&=&format=webp&quality=lossless&width=656&height=437");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -138,7 +138,7 @@
                 </div>
                 <div class="creator-info">
                     <img class="img"
-                        src="https://media.discordapp.net/attachments/1141220004910600345/1308234553076219976/profile-placeholder.jpg?ex=673d33df&is=673be25f&hm=b0a4ff10d71a971684571e04a03c25dce5ef859e973ca01d999a344ce4346db3&=&format=webp&width=67&height=67"
+                        src="https://media.discordapp.net/attachments/1141220004910600345/1308234553076219976/profile-placeholder.jpg?ex=674f001f&is=674dae9f&hm=2a8191debc2287c45e93f0719192a5aaaa4414ff97b3bddfa9a9a11e2a885273&=&format=webp&width=67&height=67"
                         alt="Placeholder">
                     <p class="username-creator">{{ $user->username }}</p>
                     <p class="tag">UNBANNED</p>
@@ -152,23 +152,3 @@
 </body>
 
 </html>
-
-{{-- <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta Desbaneada</title>
-</head>
-<body>
-    <h1>Hola, {{ $user->name }}</h1>
-
-    <p>Nos complace informarte que tu cuenta en nuestra plataforma ha sido restaurada.</p>
-
-    <p>Puedes volver a acceder a tu cuenta y continuar disfrutando de nuestros servicios.</p>
-
-    <p>Gracias,</p>
-    <p>El equipo de soporte</p>
-</body>
-</html> --}}

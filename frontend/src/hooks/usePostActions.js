@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import {
   createPostAsync,
+  deletePostByIdAsync,
+  getAllPostAdminAsync,
   getAllPostAsync,
   getCommetsPost,
   getPostById,
@@ -20,6 +23,10 @@ export const usePostActions = () => {
 
   const listPosts = () => {
     dispatch(getAllPostAsync());
+  };
+
+  const listPostsAdmin = () => {    
+    dispatch(getAllPostAdminAsync());
   };
 
   const listPostsByUser = (id) => {
@@ -42,6 +49,22 @@ export const usePostActions = () => {
     return dispatch(saveCommentAsync(commentData));
   };
 
+  const deletePostById = async (postId) => {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, Eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      return dispatch(deletePostByIdAsync(postId));
+    }
+  };
+
   const searchPosts = (searchProperty) => {
     dispatch(getSearchPostAsync(searchProperty));
   };
@@ -60,5 +83,7 @@ export const usePostActions = () => {
     saveComment,
     searchPosts,
     topCommentedPosts,
+    deletePostById,
+    listPostsAdmin
   };
 };

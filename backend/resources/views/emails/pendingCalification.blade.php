@@ -38,7 +38,7 @@
             width: 100%;
             max-width: 346px;
             height: 228px;
-            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308232529769271358/73d27bcbb7070bea2b263c3ac8b7c147.png?ex=673d31fc&is=673be07c&hm=eb0b69f7ef9e1216458fb584d9079b2aa4250d34ea6c7fe74870a1c34844033c&=&format=webp&quality=lossless&width=395&height=593");
+            background-image: url("https://media.discordapp.net/attachments/1141220004910600345/1308232529769271358/73d27bcbb7070bea2b263c3ac8b7c147.png?ex=674efe3c&is=674dacbc&hm=0ce1a9afdc76b303ee46376dc739ebec6b7c37daacf8c3f836ba9190b78bc26c&=&format=webp&quality=lossless&width=395&height=593");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -136,7 +136,7 @@
                 </div>
                 <div class="creator-info">
                     {{-- <img src="http://127.0.0.1:8000/storage/{{$data['usuarioPost']->avatar}}" alt=""> --}}
-                    <img class="img" src="https://media.discordapp.net/attachments/1141220004910600345/1308234553076219976/profile-placeholder.jpg?ex=673d33df&is=673be25f&hm=b0a4ff10d71a971684571e04a03c25dce5ef859e973ca01d999a344ce4346db3&=&format=webp&width=67&height=67" alt="Placeholder">
+                    <img class="img" src="https://media.discordapp.net/attachments/1141220004910600345/1308234553076219976/profile-placeholder.jpg?ex=674f001f&is=674dae9f&hm=2a8191debc2287c45e93f0719192a5aaaa4414ff97b3bddfa9a9a11e2a885273&=&format=webp&width=67&height=67" alt="Placeholder">
                     <p class="username-creator">{{ $data['usuarioPost']->username }}</p>
                     <p class="tag">creador</p>
                 </div>

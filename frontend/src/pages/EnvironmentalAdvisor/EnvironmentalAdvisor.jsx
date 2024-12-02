@@ -73,7 +73,7 @@ export const EnvironmentalAdvisor = () => {
         </button>
       </div>
       <div className="response-container">
-        {status === "loading" && <p className="loading">Loading...</p>}
+        {status === "loading" && <p className="loading">🤖 Writing...</p>}
         {status === "succeeded" && dynamicResponse && (
           <div
             className="response"

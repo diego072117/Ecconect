@@ -17,13 +17,13 @@ import { BsFiletypeXlsx } from "react-icons/bs";
 //import "./Module.scss";
 
 export const PostsAdmin = () => {
-  const { listPosts } = usePostActions();
-  const { posts, status } = useSelector((state) => state.posts.posts);
+  const { listPostsAdmin, deletePostById } = usePostActions();
+  const { posts, status } = useSelector((state) => state.posts.postsAdmin);
   const [filterText, setFilterText] = useState("");
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   useEffect(() => {
-    listPosts();
+    listPostsAdmin();
   }, []);
 
   useEffect(() => {
@@ -73,14 +73,14 @@ export const PostsAdmin = () => {
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       posts.map((post) => ({
-        "ID": post.id,
+        ID: post.id,
         "Descripcion Post": post.descripcion || "N/A",
         "Estado Post": post?.state,
-        "Email": post.usuario_creador?.email || "N/A",
-        "Nombre": post.usuario_creador?.name || "N/A",
-        "Username": post.usuario_creador?.username || "N/A",
-        "Telefono": post.usuario_creador?.telefono || "N/A",
-        "Ban": post.usuario_creador.isban ? 'Si' : 'No',
+        Email: post.usuario_creador?.email || "N/A",
+        Nombre: post.usuario_creador?.name || "N/A",
+        Username: post.usuario_creador?.username || "N/A",
+        Telefono: post.usuario_creador?.telefono || "N/A",
+        Ban: post.usuario_creador.isban ? "Si" : "No",
         "Creado el": post.created_at
           ? new Date(post.created_at).toLocaleString()
           : "N/A",
@@ -89,8 +89,13 @@ export const PostsAdmin = () => {
 
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Posts");
-  
+
     XLSX.writeFile(workbook, "posts-list.xlsx");
+  };
+
+  const handleDeletePost = async (id) => {
+    await deletePostById(id);
+    listPostsAdmin();
   };
 
   const columns = [
@@ -115,6 +120,26 @@ export const PostsAdmin = () => {
             }}
           />
         </Link>
+      ),
+      ignoreRowClick: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          <button
+            className="button-ban"
+            onClick={() => handleDeletePost(row.id)}
+            title="DELETE"
+          >
+            <img
+              src={"/assets/icons/delete.svg"}
+              alt="delete"
+              width={24}
+              height={24}
+            />
+          </button>
+        </>
       ),
       ignoreRowClick: true,
     },
@@ -151,7 +176,7 @@ export const PostsAdmin = () => {
             className="export-button"
             title="Download Excel"
           >
-            <BsFiletypeXlsx/>
+            <BsFiletypeXlsx />
           </button>
         </div>
       </div>

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::post('/CreatePost', 'createPost');
     Route::post('/UpdatePost/{id}', 'updatePost');
     Route::get('/GetPosts', 'getAllPosts');
+    Route::get('/GetPostsAdmin', 'getAllPostsAdmin');
     Route::get('/GetPostById/{id}', 'getPostById');
     Route::post('/SavePost', 'savePost');
     Route::get('/PostByUser/{id}', 'getPostByUser');
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'Posts', 'controller' => PostController::class], funct
     Route::put('/FinishPost/{id}', 'finishPost');
     Route::get('/SearchPosts', 'searchPosts');
     Route::get('/posts/most-commented', 'getMostCommentedPosts');
+    Route::delete('/deletePost/{postId}', 'deletePost');
 });
 
 Route::group(['prefix' => 'Follower', 'controller' => FollowerController::class], function () {
